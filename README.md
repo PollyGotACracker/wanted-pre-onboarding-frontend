@@ -1,1 +1,4 @@
-# wanted-pre-onboarding-frontend
+# 원티드 프리온보딩 - 프론트엔드
+
+- 테스트 이메일: polly@test.com
+- 테스트 비밀번호: 12341234

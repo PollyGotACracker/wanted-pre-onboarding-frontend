@@ -12,7 +12,6 @@ export const signUp = async ({ email, password }) => {
   try {
     const response = await fetch(`${TASK_API}/auth/signup`, options);
     const result = await response.json();
-
     if (result?.status > 200) return false;
     else return true;
   } catch (error) {
@@ -33,13 +32,8 @@ export const signIn = async ({ email, password }) => {
   try {
     const response = await fetch(`${TASK_API}/auth/signin`, options);
     const result = await response.json();
-
-    if (result.access_token) {
-      localStorage.setItem("access_token", result.access_token);
-      localStorage.setItem("email", email);
-      return true;
-    }
-    return false;
+    if (result.access_token) return result.access_token;
+    else return false;
   } catch (error) {
     console.error(error);
     return false;

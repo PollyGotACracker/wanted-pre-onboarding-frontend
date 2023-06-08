@@ -5,7 +5,7 @@ import { useAuthContext } from "../../contexts/authContext";
 
 const SignForm = () => {
   const { pathname: path } = useLocation();
-  const { getToken } = useAuthContext();
+  const { setToken, userSignIn } = useAuthContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isInvalid, setIsInvalid] = useState(true);
@@ -16,9 +16,10 @@ const SignForm = () => {
       dataset: "signin-button",
       text: "로그인",
       click: async () => {
-        const result = await signIn({ email, password });
-        if (result) {
-          getToken(email);
+        const token = await signIn({ email, password });
+        if (token) {
+          setToken({ token, email });
+          userSignIn(email);
           navigate("/todo", { replace: true });
         } else {
           window.alert("오류");

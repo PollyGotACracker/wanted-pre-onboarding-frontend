@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { signUp, signIn } from "../../services/auth";
+import { signUp, signIn } from "../../services/auth.service";
 import { useAuthContext } from "../../contexts/authContext";
+import { ERROR_AUTH } from "../../constants/error";
 
 const SignForm = () => {
   const { pathname: path } = useLocation();
@@ -22,7 +23,7 @@ const SignForm = () => {
           userSignIn(email);
           navigate("/todo", { replace: true });
         } else {
-          window.alert("오류");
+          window.alert(ERROR_AUTH.signIn);
         }
       },
     },
@@ -35,7 +36,7 @@ const SignForm = () => {
           window.alert("환영합니다!");
           navigate("/signin", { replace: true });
         } else {
-          window.alert("오류");
+          window.alert(ERROR_AUTH.signUp);
         }
       },
     },

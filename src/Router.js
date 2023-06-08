@@ -12,12 +12,14 @@ const NavRouter = createBrowserRouter([
         element: <SignIn />,
       },
       { path: "signup", element: <SignUp /> },
-      { path: "todo", element: <Todo /> },
+      {
+        path: "todo",
+        element: <Todo />,
+      },
       { path: "*", element: <NotFound /> },
     ],
   },
 ]);
-
 const NavRouterProvider = () => {
   return <RouterProvider router={NavRouter}></RouterProvider>;
 };

@@ -12,6 +12,11 @@ export const useAuthContext = () => {
   return useContext(AuthContext);
 };
 
+const initState = {
+  isSignIn: false,
+  email: "",
+};
+
 const TYPE = {
   SIGN_IN: "SIGN_IN",
   SIGN_OUT: "SIGN_OUT",
@@ -30,28 +35,48 @@ const reducer = (state, action) => {
   }
 };
 
-const initState = {
-  isSignIn: false,
-  email: "",
-};
-
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initState);
 
-  const getToken = useCallback(
+  const userSignIn = useCallback(
     (value) => dispatch({ type: TYPE.SIGN_IN, value }),
     []
   );
-  const removeToken = useCallback(() => dispatch({ type: TYPE.SIGN_OUT }), []);
+  const userSignOut = useCallback(() => dispatch({ type: TYPE.SIGN_OUT }), []);
+
+  const getToken = useCallback(() => {
+    const token = localStorage.getItem("access_token");
+    const email = localStorage.getItem("email");
+    return { token, email };
+  }, []);
+  const setToken = useCallback(({ token, email }) => {
+    localStorage.setItem("access_token", token);
+    localStorage.setItem("email", email);
+  }, []);
+  const removeToken = useCallback(() => {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("email");
+  }, []);
 
   const value = useMemo(
     () => ({
       isSignIn: state.isSignIn,
       email: state.email,
+      userSignIn,
+      userSignOut,
       getToken,
+      setToken,
       removeToken,
     }),
-    [state.isSignIn, state.email, getToken, removeToken]
+    [
+      state.isSignIn,
+      state.email,
+      userSignIn,
+      userSignOut,
+      getToken,
+      setToken,
+      removeToken,
+    ]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

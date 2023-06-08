@@ -5,14 +5,13 @@ import { useCallback, useMemo } from "react";
 
 const Nav = () => {
   const navigate = useNavigate();
-  const { email, isSignIn, removeToken } = useAuthContext();
+  const { email, isSignIn, removeToken, userSignOut } = useAuthContext();
 
   const signOut = useCallback(() => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("email");
     removeToken();
+    userSignOut();
     navigate("/", { replace: true });
-  }, [navigate, removeToken]);
+  }, [removeToken, userSignOut, navigate]);
 
   const navLinks = useMemo(() => {
     if (!isSignIn) {

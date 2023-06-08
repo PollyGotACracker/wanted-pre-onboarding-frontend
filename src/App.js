@@ -5,13 +5,12 @@ import "./styles/App.css";
 import Nav from "./components/Nav";
 
 const App = () => {
-  const { isSignIn, getToken } = useAuthContext();
+  const { isSignIn, getToken, userSignIn } = useAuthContext();
 
   useLayoutEffect(() => {
-    const token = localStorage.getItem("access_token");
-    const email = localStorage.getItem("email");
-    if (token) getToken(email);
-  }, [isSignIn, getToken]);
+    const { token, email } = getToken();
+    if (token) userSignIn(email);
+  }, [isSignIn, getToken, userSignIn]);
 
   return (
     <div className="App">

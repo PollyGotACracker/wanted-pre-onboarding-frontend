@@ -9,6 +9,8 @@ const SignForm = () => {
   const { setToken, userSignIn } = useAuthContext();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordType, setPasswordType] = useState("password");
+  const [signMessage, setSignMessage] = useState("");
   const [isInvalid, setIsInvalid] = useState(true);
   const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ const SignForm = () => {
           userSignIn(email);
           navigate("/todo", { replace: true });
         } else {
-          window.alert(ERROR_AUTH.signIn);
+          setSignMessage(ERROR_AUTH.signIn);
         }
       },
     },
@@ -36,10 +38,15 @@ const SignForm = () => {
           window.alert("환영합니다!");
           navigate("/signin", { replace: true });
         } else {
-          window.alert(ERROR_AUTH.signUp);
+          setSignMessage(ERROR_AUTH.signUp);
         }
       },
     },
+  };
+
+  const PASSWORD = {
+    password: { click: () => setPasswordType("text"), text: "비밀번호 표시" },
+    text: { click: () => setPasswordType("password"), text: "비밀번호 숨기기" },
   };
 
   const onChangeInput = useCallback((e) => {
@@ -66,11 +73,15 @@ const SignForm = () => {
       />
       <input
         data-testid="password-input"
+        type={passwordType}
         name="password"
         spellCheck="false"
         value={password}
         onChange={onChangeInput}
       />
+      <button type="button" onClick={PASSWORD[passwordType].click}>
+        {PASSWORD[passwordType].text}
+      </button>
       <button
         type="button"
         data-testid={BUTTON[path].dataset}
@@ -79,6 +90,7 @@ const SignForm = () => {
       >
         {BUTTON[path].text}
       </button>
+      <div>{signMessage}</div>
     </form>
   );
 };

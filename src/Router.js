@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { App, Home, SignIn, SignUp, Todo, NotFound } from "./routerComps.js";
+import PreTodo from "./pages/Todo/PreTodo.jsx";
 
 const NavRouter = createBrowserRouter([
   {
@@ -14,7 +15,8 @@ const NavRouter = createBrowserRouter([
       { path: "signup", element: <SignUp /> },
       {
         path: "todo",
-        element: <Todo />,
+        element: <PreTodo />,
+        children: [{ path: "", element: <Todo /> }],
       },
       { path: "*", element: <NotFound /> },
     ],

@@ -2,8 +2,10 @@ import { memo, useState } from "react";
 import { useAuthContext } from "../../contexts/authContext";
 import { updateTodo, deleteTodo } from "../../services/todo.service";
 import { ERROR_TODO } from "../../constants/error";
+import { useTodoContext } from "../../contexts/todoContext";
 
-const TodoItem = memo(({ item, todoData, setTodoData }) => {
+const TodoItem = memo(({ item }) => {
+  const { updateData, deleteData } = useTodoContext();
   const [todoItem, setTodoItem] = useState({ ...item });
   const [isModify, setIsModify] = useState(false);
   const { getToken } = useAuthContext();
@@ -22,13 +24,13 @@ const TodoItem = memo(({ item, todoData, setTodoData }) => {
   const onClickUpdate = async ({ item }) => {
     const result = await updateTodo({ token, item });
     if (!result) window.alert(ERROR_TODO.update);
+    else updateData({ item });
   };
 
   const onClickDelete = async () => {
     const result = await deleteTodo({ token, id: todoItem.id });
     if (result) {
-      const changed = todoData.filter((item) => item.id !== todoItem.id);
-      setTodoData([...changed]);
+      deleteData({ id: todoItem.id });
     } else window.alert(ERROR_TODO.delete);
   };
 

@@ -1,40 +1,36 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useMemo } from "react";
 import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
 import { useAuthContext } from "../../contexts/authContext";
 import { getTodos } from "../../services/todo.service";
-import { ERROR_AUTH } from "../../constants/error";
+import { useTodoContext } from "../../contexts/todoContext";
+import { ERROR_TODO } from "../../constants/error";
+import TodoCount from "./TodoCount";
 
 const Todo = () => {
-  const [todoData, setTodoData] = useState([]);
+  const { data, setData } = useTodoContext();
   const { getToken } = useAuthContext();
-  const { token } = getToken();
 
-  const getData = async () => {
-    const data = await getTodos({ token });
-    if (data) setTodoData([...data]);
-  };
+  useEffect(
+    () => async () => {
+      const { token } = getToken();
+      const data = await getTodos({ token });
+      if (data) setData({ data: [...data] });
+      else window.alert(ERROR_TODO.get);
+    },
+    [getToken, setData]
+  );
 
-  useEffect(() => {
-    if (!token) {
-      window.alert(ERROR_AUTH.noToken);
-      window.location.replace("/signin");
-    }
-    if (token) getData();
-  }, []);
+  const items = useMemo(() => {
+    return data.map((item) => <TodoItem key={item.id} item={item} />);
+  }, [data]);
 
   return (
     <main>
       Todo
-      <TodoForm todoData={todoData} setTodoData={setTodoData} />
-      {todoData.map((item) => (
-        <TodoItem
-          key={item.id}
-          item={item}
-          todoData={todoData}
-          setTodoData={setTodoData}
-        />
-      ))}
+      <TodoCount />
+      <TodoForm />
+      {items}
     </main>
   );
 };

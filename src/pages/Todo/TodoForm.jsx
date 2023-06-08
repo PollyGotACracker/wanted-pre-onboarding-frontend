@@ -1,10 +1,14 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import { createTodo } from "../../services/todo.service";
 import { useAuthContext } from "../../contexts/authContext";
+import { useTodoContext } from "../../contexts/todoContext";
 
-const TodoForm = ({ todoData, setTodoData }) => {
+const TodoForm = () => {
+  const { data, createData } = useTodoContext();
   const [todo, setTodo] = useState("");
   const { getToken } = useAuthContext();
+  const todoRef = useRef(null);
+
   const onChangeInput = useCallback((e) => setTodo(e.target.value), []);
 
   const onClickButton = useCallback(async () => {
@@ -12,11 +16,13 @@ const TodoForm = ({ todoData, setTodoData }) => {
     const { token } = getToken();
     const result = await createTodo({ token, todo });
     if (result) {
-      setTodoData([...todoData, result]);
+      createData({ item: result });
+      setTodo("");
+      todoRef.current.focus();
     } else {
       window.alert("오류");
     }
-  }, [todo]);
+  }, [todo, data, getToken, createData]);
 
   return (
     <form>
@@ -24,6 +30,7 @@ const TodoForm = ({ todoData, setTodoData }) => {
         data-testid="new-todo-input"
         onChange={onChangeInput}
         value={todo}
+        ref={todoRef}
       />
       <button
         data-testid="new-todo-add-button"

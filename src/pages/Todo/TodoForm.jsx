@@ -2,7 +2,7 @@ import { useState, useCallback } from "react";
 import { createTodo } from "../../services/todo";
 import { useAuthContext } from "../../contexts/authContext";
 
-const TodoForm = () => {
+const TodoForm = ({ todoData, setTodoData }) => {
   const [todo, setTodo] = useState("");
   const { getToken } = useAuthContext();
   const onChangeInput = useCallback((e) => setTodo(e.target.value), []);
@@ -12,7 +12,7 @@ const TodoForm = () => {
     const { token } = getToken();
     const result = await createTodo({ token, todo });
     if (result) {
-      const { id, isCompleted, todo, userId } = result;
+      setTodoData([...todoData, result]);
     } else {
       window.alert("오류");
     }

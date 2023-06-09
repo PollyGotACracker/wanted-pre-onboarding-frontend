@@ -7,7 +7,7 @@ const SignIn = () => {
   return (
     <main className="signIn">
       <div>SignIn</div>
-      <div>{location.state.message}</div>
+      <div>{location?.state?.message || ""}</div>
       <SignForm />
     </main>
   );

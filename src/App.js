@@ -1,20 +1,20 @@
-import { useLayoutEffect } from "react";
-import { useAuthContext } from "./contexts/authContext";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import "./styles/App.css";
 import Nav from "./components/Nav";
+import { useAuthContext } from "./contexts/authContext";
 
 const App = () => {
-  const { isSignIn, getToken, userSignIn } = useAuthContext();
+  const { getToken, userSignIn } = useAuthContext();
+  const { token, email } = getToken();
 
-  useLayoutEffect(() => {
-    const { token, email } = getToken();
+  useEffect(() => {
     if (token) userSignIn(email);
-  }, [isSignIn, getToken, userSignIn]);
+  }, [email, token, userSignIn]);
 
   return (
     <div className="App">
-      <Nav />
+      <Nav token={token} email={email} />
       <Outlet />
     </div>
   );

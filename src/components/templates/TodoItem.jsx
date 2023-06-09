@@ -1,8 +1,11 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../contexts/authContext";
 import { updateTodo, deleteTodo } from "../../services/todo.service";
 import { ERROR_TODO } from "../../constants/error";
 import { useTodoContext } from "../../contexts/todoContext";
+import Checkbox from "../atoms/Checkbox";
+import Button from "../atoms/Button";
+import Input from "../atoms/Input";
 
 const TodoItem = memo(({ item }) => {
   const { updateData, deleteData } = useTodoContext();
@@ -10,6 +13,7 @@ const TodoItem = memo(({ item }) => {
   const [isModify, setIsModify] = useState(false);
   const { getToken } = useAuthContext();
   const { token } = getToken();
+  const todoRef = useRef(null);
 
   const onChangeCheck = () =>
     setTodoItem((prev) => {
@@ -37,10 +41,12 @@ const TodoItem = memo(({ item }) => {
   const TEXT = {
     false: <span>{todoItem.todo}</span>,
     true: (
-      <input
-        data-testid="modify-input"
+      <Input
+        dataset={"modify-input"}
+        size={"full"}
         value={todoItem.todo}
         onChange={onChangeInput}
+        refHook={todoRef}
       />
     ),
   };
@@ -67,28 +73,27 @@ const TodoItem = memo(({ item }) => {
     },
   };
 
+  useEffect(() => {
+    if (isModify) todoRef.current.focus();
+  }, [isModify]);
+
   return (
     <li>
-      <label>
-        <input
-          type="checkbox"
-          checked={todoItem.isCompleted}
-          onChange={onChangeCheck}
-        />
-        {TEXT[isModify]}
-      </label>
-      <button
-        data-testid={BUTTON[isModify].firstDataset}
+      <Checkbox
+        checked={todoItem.isCompleted}
+        onChange={onChangeCheck}
+        text={TEXT[isModify]}
+      />
+      <Button
+        dataset={BUTTON[isModify].firstDataset}
         onClick={BUTTON[isModify].firstAction}
-      >
-        {BUTTON[isModify].firstText}
-      </button>
-      <button
-        data-testid={BUTTON[isModify].secondDataset}
+        text={BUTTON[isModify].firstText}
+      />
+      <Button
+        dataset={BUTTON[isModify].secondDataset}
         onClick={BUTTON[isModify].secondAction}
-      >
-        {BUTTON[isModify].secondText}
-      </button>
+        text={BUTTON[isModify].secondText}
+      />
     </li>
   );
 });

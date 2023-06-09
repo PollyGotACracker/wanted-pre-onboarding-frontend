@@ -1,15 +1,16 @@
-import SignForm from "./SignForm";
 import { useLocation } from "react-router-dom";
+import SignForm from "../../components/templates/UserForm";
+import Title from "../../components/atoms/Title";
 
-const SignIn = () => {
+const SignInPage = () => {
   const location = useLocation();
 
   return (
     <main className="signIn">
-      <div>SignIn</div>
+      <Title text={"Sign In"} />
       <div>{location?.state?.message || ""}</div>
       <SignForm />
     </main>
   );
 };
-export default SignIn;
+export default SignInPage;

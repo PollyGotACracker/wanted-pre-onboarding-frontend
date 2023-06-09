@@ -1,14 +1,15 @@
 import NavAnchor from "../atoms/NavAnchor";
 import NavButton from "../atoms/NavButton";
-import { RiHome4Fill, RiLogoutBoxLine } from "react-icons/ri";
+import { RiListCheck, RiLogoutBoxLine } from "react-icons/ri";
 
 const NavSignIn = ({ email, signOut }) => {
   return (
     <>
+      <NavAnchor className={"home"} to={"/"} text={"My TodoList"} />
       <NavAnchor
         className={"todo"}
         to={"/todo"}
-        icon={<RiHome4Fill />}
+        icon={<RiListCheck />}
         text={"할 일"}
       />
       <span className="user-email">{email}</span>

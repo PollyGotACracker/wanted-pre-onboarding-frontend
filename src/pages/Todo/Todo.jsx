@@ -10,10 +10,10 @@ import TodoCount from "./TodoCount";
 const Todo = () => {
   const { data, setData } = useTodoContext();
   const { getToken } = useAuthContext();
+  const { token } = getToken();
 
   useEffect(
     () => async () => {
-      const { token } = getToken();
       const data = await getTodos({ token });
       if (data) setData({ data: [...data] });
       else window.alert(ERROR_TODO.get);

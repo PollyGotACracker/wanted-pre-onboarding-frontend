@@ -2,6 +2,7 @@ import { useCallback, useMemo } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import { useAuthContext } from "../contexts/authContext";
 import { RiHome4Fill, RiLoginBoxLine, RiLogoutBoxLine } from "react-icons/ri";
+import "./Nav.css";
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const Nav = () => {
           <NavLink className="todo" to={`/todo`}>
             <RiHome4Fill />할 일
           </NavLink>
-          <span>{email}</span>
+          <span className="user-email">{email}</span>
           <button className="signout" onClick={signOut}>
             <RiLogoutBoxLine />
             로그아웃

@@ -1,0 +1,26 @@
+.Todo ul {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Todo ul li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0 20px;
+  height: 50px;
+  gap: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* todo 에만 적용할 것 */
+.Todo > ul > li label,
+.Todo > ul > li label span {
+  flex: 1;
+}
+/* padding: span => input 으로 전환 시 layout 이동 방지 */
+.Todo > ul > li label span {
+  padding: 0 7px;
+  transition: all 0.2s ease;
+}

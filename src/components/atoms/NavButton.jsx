@@ -1,14 +1,13 @@
-const NavButton = ({ className, onClick, icon, text }) => {
-  const style = {
-    color: "red",
-  };
+import { memo } from "react";
+import "../../styles/Atoms.css";
 
+const NavButton = memo(({ className, onClick, icon, text }) => {
   return (
-    <button className={className} onClick={onClick} style={style}>
+    <button className={`navButton ${className}`} onClick={onClick}>
       {icon}
       {text}
     </button>
   );
-};
+});
 
 export default NavButton;

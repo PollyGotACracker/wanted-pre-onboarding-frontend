@@ -1,16 +1,23 @@
+import { memo } from "react";
+import "../../styles/Atoms.css";
 import { NavLink } from "react-router-dom";
 
-const NavAnchor = ({ className, to, icon, text }) => {
-  const style = {
-    color: "red",
-  };
-
+const NavAnchor = memo(({ className, to, icon, text }) => {
   return (
-    <NavLink className={className} to={to} style={style}>
+    <NavLink
+      className={({ isActive }) =>
+        isActive ? `navAnchor ${className} active` : `navAnchor ${className}`
+      }
+      to={to}
+    >
       {icon}
       {text}
     </NavLink>
   );
-};
+});
 
 export default NavAnchor;
+
+NavAnchor.defaultProps = {
+  icon: "",
+};

@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   App,
-  Home,
-  SignIn,
-  SignUp,
+  HomePage,
+  SignInPage,
+  SignUpPage,
   TodoPage,
   Private,
   NotFound,
@@ -14,12 +14,12 @@ const NavRouter = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { path: "", element: <Home /> },
+      { path: "", element: <HomePage /> },
       {
         path: "signin",
-        element: <SignIn />,
+        element: <SignInPage />,
       },
-      { path: "signup", element: <SignUp /> },
+      { path: "signup", element: <SignUpPage /> },
       {
         path: "todo",
         element: <Private />,

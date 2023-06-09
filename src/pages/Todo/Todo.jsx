@@ -1,24 +1,44 @@
-import { useEffect, useMemo } from "react";
-import TodoForm from "./TodoForm";
-import TodoItem from "./TodoItem";
-import { useAuthContext } from "../../contexts/authContext";
-import { getTodos } from "../../services/todo.service";
-import { useTodoContext } from "../../contexts/todoContext";
+import { useEffect, useMemo, useState, useCallback, useRef } from "react";
+import Title from "../../components/atoms/Title";
+import TodoCount from "../../components/templates/TodoCount";
+import TodoForm from "../../components/templates/TodoForm";
+import TodoItem from "../../components/templates/TodoItem";
 import { ERROR_TODO } from "../../constants/error";
-import TodoCount from "./TodoCount";
+import { useAuthContext } from "../../contexts/authContext";
+import { useTodoContext } from "../../contexts/todoContext";
+import { getTodos, createTodo } from "../../services/todo.service";
 
 const Todo = () => {
-  const { data, setData } = useTodoContext();
+  const { data, setData, createData } = useTodoContext();
   const { getToken } = useAuthContext();
   const { token } = getToken();
+  const [todo, setTodo] = useState("");
+  const todoRef = useRef(null);
+
+  const onChangeInput = useCallback((e) => setTodo(e.target.value), []);
+
+  const onClickButton = useCallback(async () => {
+    if (todo.length < 1) return false;
+
+    const { token } = getToken();
+    const result = await createTodo({ token, todo });
+
+    if (result) {
+      createData({ item: result });
+      setTodo("");
+      todoRef.current.focus();
+    } else {
+      window.alert("오류");
+    }
+  }, [todo, getToken, createData]);
 
   useEffect(
     () => async () => {
-      const data = await getTodos({ token });
-      if (data) setData({ data: [...data] });
+      const result = await getTodos({ token });
+      if (result) setData({ data: [...result] });
       else window.alert(ERROR_TODO.get);
     },
-    [getToken, setData]
+    [token, getToken, setData]
   );
 
   const items = useMemo(() => {
@@ -26,11 +46,16 @@ const Todo = () => {
   }, [data]);
 
   return (
-    <main>
-      Todo
+    <main className="Todo">
+      <Title text={"To Do"} />
       <TodoCount />
-      <TodoForm />
-      {items}
+      <TodoForm
+        onChangeInput={onChangeInput}
+        inputValue={todo}
+        inputRef={todoRef}
+        onClickButton={onClickButton}
+      />
+      <ul>{items}</ul>
     </main>
   );
 };

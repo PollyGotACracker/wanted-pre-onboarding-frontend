@@ -1,13 +1,14 @@
 import NavAnchor from "../atoms/NavAnchor";
-import { RiHome4Fill, RiLoginBoxLine } from "react-icons/ri";
+import { RiBallPenFill, RiLoginBoxLine } from "react-icons/ri";
 
 const NavSignOut = () => {
   return (
     <>
+      <NavAnchor className={"home"} to={"/"} text={"My TodoList"} />
       <NavAnchor
         className={"signup"}
         to={"/signup"}
-        icon={<RiHome4Fill />}
+        icon={<RiBallPenFill />}
         text={"회원가입"}
       />
       <NavAnchor

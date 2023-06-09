@@ -67,14 +67,16 @@ const SignForm = () => {
       <input
         data-testid="email-input"
         name="email"
+        placeholder="이메일"
         spellCheck="false"
         value={email}
         onChange={onChangeInput}
       />
       <input
         data-testid="password-input"
-        type={passwordType}
         name="password"
+        placeholder="비밀번호"
+        type={passwordType}
         spellCheck="false"
         value={password}
         onChange={onChangeInput}

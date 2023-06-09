@@ -8,24 +8,6 @@
 
 :root {
   --font-family: "NanumSquareNeo-Variable";
-  --red: #c73935;
-  --yellow: #e69215;
-  --lightyellow: rgba(249, 162, 2, 1);
-  --yellowalpha: rgba(249, 162, 2, 0.8);
-  --blue: #1d415b;
-  --bluealpha: rgba(29, 65, 91, 0.6);
-  --grayblue: #60798c;
-  --green: #1aa36d;
-  --violet: #3f3d56;
-  --violetalpha: rgba(63, 61, 86, 0.8);
-  --light: #faf9f7;
-  --dark: #181818;
-  --lightgray: #ccc;
-  --gray: #aaa;
-  --darkgray: #555;
-  --lightalpha: rgba(255, 255, 255, 0.3);
-  --semialpha: rgba(0, 0, 0, 0.04);
-  --darkalpha: rgba(0, 0, 0, 0.5);
 }
 
 body {

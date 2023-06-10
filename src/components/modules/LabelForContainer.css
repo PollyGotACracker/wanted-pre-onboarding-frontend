@@ -1,0 +1,11 @@
+.label-for {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.label-for {
+  font-size: 1.2rem;
+}

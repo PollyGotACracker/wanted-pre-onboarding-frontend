@@ -1,0 +1,38 @@
+.list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 5px 20px;
+  min-height: 50px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.list li span {
+  word-break: keep-all;
+}
+
+/* React Transition Group */
+.list .item-enter {
+  opacity: 0;
+}
+
+.list .item-enter-active {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+.list .item-exit {
+  opacity: 1;
+}
+
+.list .item-exit-active {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}

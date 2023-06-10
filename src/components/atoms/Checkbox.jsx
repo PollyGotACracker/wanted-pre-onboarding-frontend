@@ -1,5 +1,5 @@
 import { memo } from "react";
-import "../../styles/Atoms.css";
+import "./Checkbox.css";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 
 const Checkbox = memo(({ checked, onChange, text }) => {

@@ -6,6 +6,7 @@ export const ERROR_AUTH = {
 
 export const ERROR_TODO = {
   get: "데이터를 가져오는 중 오류가 발생했습니다.\n다시 시도해주세요.",
+  create: "항목 추가 중 오류가 발생했습니다.\n다시 시도해주세요.",
   update: "업데이트 중 오류가 발생했습니다.\n다시 시도해주세요.",
   delete: "삭제 중 오류가 발생했습니다.\n다시 시도해주세요.",
 };

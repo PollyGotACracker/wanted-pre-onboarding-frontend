@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState, useCallback, useRef } from "react";
-import Title from "../../components/atoms/Title";
+import { useEffect, useState, useCallback, useRef } from "react";
+import Header from "../../components/atoms/Header";
+import ListContainer from "../../components/modules/ListContainer";
 import TodoCount from "../../components/templates/TodoCount";
 import TodoForm from "../../components/templates/TodoForm";
 import TodoItem from "../../components/templates/TodoItem";
@@ -19,43 +20,41 @@ const Todo = () => {
 
   const onClickButton = useCallback(async () => {
     if (todo.length < 1) return false;
-
-    const { token } = getToken();
     const result = await createTodo({ token, todo });
-
     if (result) {
       createData({ item: result });
       setTodo("");
       todoRef.current.focus();
     } else {
-      window.alert("오류");
+      window.alert(ERROR_TODO.create);
     }
-  }, [todo, getToken, createData]);
+  }, [todo, token, createData]);
 
   useEffect(
     () => async () => {
       const result = await getTodos({ token });
-      if (result) setData({ data: [...result] });
-      else window.alert(ERROR_TODO.get);
+      if (result) {
+        setData({ data: [...result] });
+      } else window.alert(ERROR_TODO.get);
     },
     [token, getToken, setData]
   );
 
-  const items = useMemo(() => {
-    return data.map((item) => <TodoItem key={item.id} item={item} />);
-  }, [data]);
-
   return (
     <main className="Todo">
-      <Title text={"To Do"} />
-      <TodoCount />
+      <Header text={"To Do"} />
       <TodoForm
         onChangeInput={onChangeInput}
         inputValue={todo}
         inputRef={todoRef}
         onClickButton={onClickButton}
       />
-      <ul>{items}</ul>
+      <TodoCount />
+      <ListContainer
+        data={data}
+        id={"id"}
+        render={(props) => <TodoItem item={props} />}
+      />
     </main>
   );
 };

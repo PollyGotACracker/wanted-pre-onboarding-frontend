@@ -1,11 +1,29 @@
+import { useNavigate } from "react-router-dom";
 import SignForm from "../../components/templates/UserForm";
-import Title from "../../components/atoms/Title";
+import { ERROR_AUTH } from "../../constants/error";
+import { signUp } from "../../services/auth.service";
 
 const SignUpPage = () => {
+  const navigate = useNavigate();
+
+  const onClickSignUp = async ({ email, password }) => {
+    const result = await signUp({ email, password });
+    if (result) {
+      window.alert("환영합니다!");
+      navigate("/signin", { replace: true });
+    } else {
+      return ERROR_AUTH.signUp;
+    }
+  };
+
   return (
     <main className="signUp">
-      <Title text={"Sign Up"} />
-      <SignForm />
+      <SignForm
+        header={"Sign Up"}
+        dataset={"signup-button"}
+        text={"회원가입"}
+        onClick={onClickSignUp}
+      />
     </main>
   );
 };

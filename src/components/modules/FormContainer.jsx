@@ -1,13 +1,20 @@
-const FormContainer = ({ direction, children }) => {
-  const style = {
-    flexDirection: direction,
-  };
+import "./FormContainer.css";
 
+const FormContainer = ({ className, children }) => {
   return (
-    <form className="form" style={style}>
+    <form
+      className={`form ${className}`}
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       {children}
     </form>
   );
 };
 
 export default FormContainer;
+
+FormContainer.defaultProps = {
+  className: "",
+};

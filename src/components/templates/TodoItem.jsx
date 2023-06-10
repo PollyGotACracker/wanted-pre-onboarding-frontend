@@ -6,13 +6,14 @@ import { useTodoContext } from "../../contexts/todoContext";
 import Checkbox from "../atoms/Checkbox";
 import Button from "../atoms/Button";
 import Input from "../atoms/Input";
+import "./TodoItem.css";
 
 const TodoItem = memo(({ item }) => {
   const { updateData, deleteData } = useTodoContext();
-  const [todoItem, setTodoItem] = useState({ ...item });
-  const [isModify, setIsModify] = useState(false);
   const { getToken } = useAuthContext();
   const { token } = getToken();
+  const [todoItem, setTodoItem] = useState({ ...item });
+  const [isModify, setIsModify] = useState(false);
   const todoRef = useRef(null);
 
   const onChangeCheck = () =>
@@ -43,7 +44,7 @@ const TodoItem = memo(({ item }) => {
     true: (
       <Input
         dataset={"modify-input"}
-        size={"full"}
+        className={"full"}
         value={todoItem.todo}
         onChange={onChangeInput}
         refHook={todoRef}

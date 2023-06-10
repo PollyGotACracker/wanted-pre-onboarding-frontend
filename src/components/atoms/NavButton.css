@@ -1,0 +1,19 @@
+.nav-button {
+  font-family: inherit;
+  font-size: 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  user-select: none;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.nav-button:hover {
+  color: var(--primary);
+}

@@ -1,22 +1,21 @@
 import { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { signUp, signIn } from "../../services/auth.service";
-import { useAuthContext } from "../../contexts/authContext";
-import { ERROR_AUTH } from "../../constants/error";
+import Header from "../atoms/Header";
+import Label from "../atoms/Label";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import AlertContainer from "../modules/AlertContainer";
 import FormContainer from "../modules/FormContainer";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { MdAlternateEmail, MdLock } from "react-icons/md";
+import LabelForContainer from "../modules/LabelForContainer";
 
-const SignForm = () => {
-  const { pathname: path } = useLocation();
-  const { setToken, userSignIn } = useAuthContext();
+const SignForm = ({ header, dataset, text, onClick, message = "" }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState("password");
   const [signMessage, setSignMessage] = useState("");
+  const [authMessage] = useState(message);
   const [isInvalid, setIsInvalid] = useState(true);
-  const navigate = useNavigate();
 
   const onChangeInput = useCallback((e) => {
     const { name, value } = e.target;
@@ -24,45 +23,18 @@ const SignForm = () => {
     if (name === "password") setPassword(value);
   }, []);
 
-  const onClickSignIn = async () => {
-    const token = await signIn({ email, password });
-    if (token) {
-      setToken({ token, email });
-      userSignIn(email);
-      navigate("/todo", { replace: true });
-    } else {
-      setSignMessage(ERROR_AUTH.signIn);
-    }
-  };
-
-  const onClickSignUp = async () => {
-    const result = await signUp({ email, password });
-    if (result) {
-      window.alert("환영합니다!");
-      navigate("/signin", { replace: true });
-    } else {
-      setSignMessage(ERROR_AUTH.signUp);
-    }
-  };
-
-  const BUTTON = {
-    "/signin": {
-      dataset: "signin-button",
-      text: "로그인",
-      click: onClickSignIn,
-    },
-    "/signup": {
-      dataset: "signup-button",
-      text: "회원가입",
-      click: onClickSignUp,
-    },
-  };
-
   const PASSWORD = {
-    password: { click: () => setPasswordType("text"), text: <AiOutlineEye /> },
+    password: {
+      click: () => {
+        setPasswordType("text");
+      },
+      icon: <AiOutlineEye />,
+      text: "비밀번호 표시",
+    },
     text: {
       click: () => setPasswordType("password"),
-      text: <AiOutlineEyeInvisible />,
+      icon: <AiOutlineEyeInvisible />,
+      text: "비밀번호 숨김",
     },
   };
 
@@ -74,38 +46,56 @@ const SignForm = () => {
   }, [email, password]);
 
   return (
-    <FormContainer direction={"column"}>
-      <Input
-        dataset={"email-input"}
-        name={"email"}
-        placeholder={"이메일"}
-        autoComplete={"true"}
-        value={email}
-        onChange={onChangeInput}
-      />
-      <Input
-        dataset={"password-input"}
-        name={"password"}
-        placeholder={"비밀번호"}
-        autoComplete={"false"}
-        type={passwordType}
-        value={password}
-        onChange={onChangeInput}
-      />
-      <Button
-        className={"secondary"}
-        onClick={PASSWORD[passwordType].click}
-        text={PASSWORD[passwordType].text}
-      />
-      <Button
-        className={"primary"}
-        dataset={BUTTON[path].dataset}
-        onClick={BUTTON[path].click}
-        disabled={isInvalid}
-        text={BUTTON[path].text}
-      />
-      <div>{signMessage}</div>
-    </FormContainer>
+    <>
+      <AlertContainer text={authMessage ? authMessage : signMessage} />
+      <FormContainer className={"column default composite"}>
+        <Header text={header} />
+        <LabelForContainer>
+          <Label htmlFor={"email"} icon={<MdAlternateEmail />} />
+          <Input
+            dataset={"email-input"}
+            id={"email"}
+            className={"full"}
+            name={"email"}
+            placeholder={"이메일"}
+            autoComplete={"true"}
+            type={"email"}
+            value={email}
+            onChange={onChangeInput}
+          />
+        </LabelForContainer>
+        <LabelForContainer>
+          <Label htmlFor={"password"} icon={<MdLock />} />
+          <Input
+            dataset={"password-input"}
+            id={"password"}
+            className={"full"}
+            name={"password"}
+            placeholder={"비밀번호"}
+            autoComplete={"false"}
+            type={passwordType}
+            value={password}
+            onChange={onChangeInput}
+          />
+        </LabelForContainer>
+        <Button
+          className={"secondary"}
+          onClick={PASSWORD[passwordType].click}
+          icon={PASSWORD[passwordType].icon}
+          text={PASSWORD[passwordType].text}
+        />
+        <Button
+          className={"primary full"}
+          dataset={dataset}
+          onClick={async () => {
+            const result = await onClick({ email, password });
+            if (result) setSignMessage(result);
+          }}
+          disabled={isInvalid}
+          text={text}
+        />
+      </FormContainer>
+    </>
   );
 };
 

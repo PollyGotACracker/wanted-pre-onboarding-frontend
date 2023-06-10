@@ -1,9 +1,9 @@
 import { memo } from "react";
-import "../../styles/Atoms.css";
+import "./NavButton.css";
 
 const NavButton = memo(({ className, onClick, icon, text }) => {
   return (
-    <button className={`navButton ${className}`} onClick={onClick}>
+    <button className={`nav-button ${className}`} onClick={onClick}>
       {icon}
       {text}
     </button>

@@ -10,7 +10,7 @@ npm install
 npm start
 ```
 
-## 문제 해결
+## 공부
 
 ### redirection 오류
 
@@ -21,3 +21,7 @@ _/todo 에서 바로 로그아웃하면 메인 화면이 아닌 로그인 화면
 - `const location = useLocation()` 을 사용하여 location 의 key 값을 확인하였다.
 - 주소창에 직접 접속했을 때와 다른 페이지에서 이동했을 때 각각 default 와 history 에 따른 위치 고유 문자열을 반환했다.
 - `(location?.key === "default" && !token)` 조건이 참일 경우 redirect 되도록 코드를 변경하였다.
+
+## react element 를 props 로 전달
+
+- `render`

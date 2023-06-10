@@ -1,0 +1,28 @@
+.nav-anchor {
+  color: inherit;
+  font-family: inherit;
+  font-size: 1rem;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 7rem;
+  height: 100%;
+  padding: 10px;
+  white-space: nowrap;
+  user-select: none;
+  outline: none;
+  transition: all 0.2s ease;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.nav-anchor.active {
+  color: var(--primary);
+  border-bottom: 5px solid var(--primary);
+}
+
+.nav-anchor:hover {
+  color: var(--primary);
+}

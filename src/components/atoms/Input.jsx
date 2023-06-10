@@ -1,8 +1,9 @@
-import "../../styles/Atoms.css";
+import "./Input.css";
 
 const Input = ({
   dataset,
-  size,
+  id,
+  className,
   type,
   name,
   placeholder,
@@ -11,17 +12,10 @@ const Input = ({
   onChange,
   refHook,
 }) => {
-  const width = {
-    full: "100%",
-  };
-
-  const style = {
-    width: width[size],
-  };
-
   return (
     <input
-      className={`input`}
+      id={id}
+      className={`input ${className}`}
       data-testid={dataset}
       name={name}
       placeholder={placeholder}
@@ -31,7 +25,6 @@ const Input = ({
       onChange={onChange}
       spellCheck="false"
       ref={refHook}
-      style={style}
     />
   );
 };
@@ -40,6 +33,8 @@ export default Input;
 
 Input.defaultProps = {
   type: "text",
+  id: "",
+  className: "",
   size: "default",
   autoComplete: "true",
   refHook: null,

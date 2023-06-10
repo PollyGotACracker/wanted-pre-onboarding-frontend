@@ -6,14 +6,27 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "TheJamsil5Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
 :root {
-  --font-family: "NanumSquareNeo-Variable";
+  --font-default: "NanumSquareNeo-Variable";
+  --font-header: "TheJamsil5Bold";
   --primary: #1e2f97;
   --secondary: #e69215;
+  --grayscale: rgba(0, 0, 0, 0.08);
   --background-color: #faf9f7;
   --disabled: rgba(0, 0, 0, 0.5);
   --font-color: #181818;
-  --border-color: rgba(0, 0, 0, 0.2);
+  --font-sub-color: rgba(0, 0, 0, 0.6);
+  --border-color: rgba(0, 0, 0, 0.4);
+  --focus-color: #181818;
+  --font-sub-size: 0.9rem;
 }
 
 * {
@@ -25,7 +38,7 @@
 body {
   background-color: var(--background-color);
   color: var(--font-color);
-  font-family: "NanumSquareNeo-Variable", -apple-system, BlinkMacSystemFont,
+  font-family: var(--font-default), -apple-system, BlinkMacSystemFont,
     "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;

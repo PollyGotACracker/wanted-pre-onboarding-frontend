@@ -1,0 +1,20 @@
+input.checkbox {
+  display: none;
+}
+label.checkbox {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+label.checkbox svg {
+  font-size: 1.5em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+label.checkbox svg:hover {
+  color: var(--primary);
+}
+span.checkbox.checked {
+  color: var(--disabled);
+  text-decoration: line-through;
+}

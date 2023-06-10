@@ -1,0 +1,22 @@
+.input {
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 10px;
+  outline: none;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  border: 1px solid var(--focus-color);
+}
+
+.input::placeholder {
+  font-family: inherit;
+  color: var(--font-sub-color);
+}
+
+.input.full {
+  width: 100%;
+}

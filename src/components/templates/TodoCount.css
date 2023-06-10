@@ -1,0 +1,13 @@
+.Todo .Count {
+  margin-top: 4vh;
+  width: 100%;
+  padding: 10px;
+  color: var(--font-sub-color);
+  font-size: var(--font-sub-size);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.Todo .Count svg {
+  font-size: 1.2rem;
+}

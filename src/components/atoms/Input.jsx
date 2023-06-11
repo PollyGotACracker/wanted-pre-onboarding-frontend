@@ -38,7 +38,7 @@ Input.defaultProps = {
   id: "",
   className: "",
   size: "default",
-  autoComplete: "true",
+  autoComplete: "false",
   onChange: null,
   onKeyDown: null,
   refHook: null,

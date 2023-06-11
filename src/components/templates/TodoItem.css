@@ -1,38 +1,28 @@
-/* 정리 */
-
-.Todo ul li label.checkbox {
-  padding: 10px;
-}
-
-.Todo ul li .checkbox,
-.Todo ul li label,
-.Todo ul li label span {
+.Todo .item label,
+.Todo .item label span {
   flex: 1;
   flex-grow: 1;
   flex-shrink: 0;
 }
 
-@media only screen and (max-width: 700px) {
-  .Todo ul li {
-    padding: 5px 5px;
-  }
-  .Todo ul li label.checkbox {
-    flex-basis: calc(100% - 10px - 10px);
-  }
-  .Todo ul li .button {
-    flex-grow: 1;
-  }
-}
-
-.Todo ul li:hover {
-  background-color: var(--grayscale);
-}
-/* padding: span => input 으로 전환 시 layout 이동 방지 */
-.Todo ul li label span {
-  padding: 0 7px;
+/*
+padding: span => input 으로 전환 시 
+input 의 border 와 padding 으로 인한
+요소 이동 방지
+*/
+.Todo .item label span {
+  padding: 0 10px;
   transition: all 0.2s ease;
 }
 
-.remove-btn {
-  margin-right: 0.5rem;
+@media only screen and (max-width: 700px) {
+  .Todo .item {
+    padding: 5px 5px;
+  }
+  .Todo .item label.checkbox {
+    flex-basis: calc(100% - 10px - 10px);
+  }
+  .Todo .item .button {
+    flex-grow: 1;
+  }
 }

@@ -16,6 +16,7 @@ const TodoForm = memo(({ onChangeInput, inputValue, inputRef, handler }) => {
         dataset={"new-todo-input"}
         className={"full"}
         placeholder={"할 일을 입력하세요..."}
+        autoComplete={"true"}
         onChange={onChangeInput}
         onKeyDown={handler}
         value={inputValue}

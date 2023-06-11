@@ -4,7 +4,6 @@ import { RiBallPenFill, RiLoginBoxLine } from "react-icons/ri";
 const NavSignOut = () => {
   return (
     <>
-      <NavAnchor className={"home"} to={"/"} text={"My TodoList"} />
       <NavAnchor
         className={"signup"}
         to={"/signup"}

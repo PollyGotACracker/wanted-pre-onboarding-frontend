@@ -5,7 +5,6 @@ import { RiListCheck, RiLogoutBoxLine } from "react-icons/ri";
 const NavSignIn = ({ email, signOut }) => {
   return (
     <>
-      <NavAnchor className={"home"} to={"/"} text={"My TodoList"} />
       <NavAnchor
         className={"todo"}
         to={"/todo"}

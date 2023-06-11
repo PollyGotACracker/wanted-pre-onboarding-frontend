@@ -11,7 +11,7 @@
   background-color: transparent;
   user-select: none;
   outline: none;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .nav-button:hover {

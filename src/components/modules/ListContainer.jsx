@@ -16,16 +16,18 @@ const ListContainer = memo(({ data, id, render }) => {
           timeout={500}
           classNames="item"
         >
-          <li ref={nodeRef}>{render(item)}</li>
+          <div className="item" ref={nodeRef}>
+            {render(item)}
+          </div>
         </CSSTransition>
       );
     });
   }, [data, id, render]);
 
   return (
-    <ul className="list">
+    <div className="list">
       <TransitionGroup>{items}</TransitionGroup>
-    </ul>
+    </div>
   );
 });
 

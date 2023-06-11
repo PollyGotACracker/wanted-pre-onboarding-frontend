@@ -1,15 +1,15 @@
 import "./AlertContainer.css";
-import { memo, useEffect, useRef } from "react";
+import { memo, useRef } from "react";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 
 const AlertContainer = memo(({ text }) => {
   const alertRef = useRef();
-  useEffect(() => {
-    if (text === "") alertRef.current.style = "display: none";
-  }, [text]);
 
   return (
-    <div className="alert" ref={alertRef}>
+    <div
+      className={`alert ${text === "" ? "hidden" : "visible"}`}
+      ref={alertRef}
+    >
       <TbAlertTriangleFilled />
       {text}
     </div>

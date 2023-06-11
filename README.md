@@ -24,4 +24,4 @@ _/todo 에서 바로 로그아웃하면 메인 화면이 아닌 로그인 화면
 
 ## react element 를 props 로 전달
 
-- `render`
+- `render` props 로 element 를 return 하는 함수를 전달

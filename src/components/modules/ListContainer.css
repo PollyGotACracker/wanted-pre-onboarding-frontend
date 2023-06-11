@@ -4,20 +4,21 @@
   flex-direction: column;
 }
 
-.list li {
-  list-style: none;
+.list .item:hover {
+  background-color: var(--grayscale);
 }
 
-.list li > * {
+.list .item > * {
   display: flex;
   align-items: center;
+  column-gap: 20px;
   padding: 5px 20px;
-  min-height: 50px;
+  min-height: 60px;
   flex-wrap: wrap;
   border-bottom: 1px solid var(--border-color);
 }
 
-.list li span {
+.list .item span {
   word-break: keep-all;
 }
 

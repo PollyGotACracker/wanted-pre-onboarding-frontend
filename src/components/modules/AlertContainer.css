@@ -3,7 +3,6 @@
   margin: 2%;
   text-align: center;
   font-weight: 700;
-  display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -12,4 +11,12 @@
 .alert svg {
   font-size: 1.8rem;
   color: var(--secondary);
+}
+
+.alert.hidden {
+  display: none;
+}
+
+.alert.visible {
+  display: inline-flex;
 }

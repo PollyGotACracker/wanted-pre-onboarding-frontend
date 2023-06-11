@@ -10,6 +10,7 @@ const Input = ({
   autoComplete,
   value,
   onChange,
+  onKeyDown,
   refHook,
 }) => {
   return (
@@ -23,6 +24,7 @@ const Input = ({
       autoComplete={autoComplete}
       value={value}
       onChange={onChange}
+      onKeyDown={onKeyDown}
       spellCheck="false"
       ref={refHook}
     />
@@ -37,5 +39,7 @@ Input.defaultProps = {
   className: "",
   size: "default",
   autoComplete: "true",
+  onChange: null,
+  onKeyDown: null,
   refHook: null,
 };

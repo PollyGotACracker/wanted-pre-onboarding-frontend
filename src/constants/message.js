@@ -1,5 +1,9 @@
-export const ERROR_AUTH = {
+export const ALERT_AUTH = {
+  signUp: "환영합니다!",
   noToken: "접근 권한이 없습니다.\n로그인 후 시도해주세요.",
+};
+
+export const ERROR_AUTH = {
   signUp: "이미 가입한 사용자입니다.\n다시 시도해주세요.",
   signIn: "가입하지 않은 사용자이거나 비밀번호 오류입니다.",
 };

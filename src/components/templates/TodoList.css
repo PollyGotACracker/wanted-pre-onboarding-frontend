@@ -1,5 +1,17 @@
-.Todo .Count {
-  margin-top: 4vh;
+.Todo .list {
+  animation: list-fadeIn 0.2s ease;
+}
+
+@keyframes list-fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.Todo .count {
   width: 100%;
   padding: 10px;
   color: var(--font-sub-color);
@@ -8,6 +20,6 @@
   align-items: center;
   gap: 5px;
 }
-.Todo .Count svg {
+.Todo .count svg {
   font-size: 1.2rem;
 }

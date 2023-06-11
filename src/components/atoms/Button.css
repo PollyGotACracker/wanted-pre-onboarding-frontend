@@ -30,6 +30,11 @@
   color: var(--secondary);
 }
 
+.button.primary {
+  min-width: 150px;
+  min-height: 60px;
+}
+
 .button.primary:not(:disabled) {
   background-color: var(--primary);
   color: white;

@@ -1,6 +1,11 @@
+*:has(.alert) {
+  position: relative;
+}
+
 .alert {
   width: 100%;
-  margin: 2%;
+  position: absolute;
+  top: 2%;
   text-align: center;
   font-weight: 700;
   justify-content: center;

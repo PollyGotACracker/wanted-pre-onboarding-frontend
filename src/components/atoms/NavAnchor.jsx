@@ -1,5 +1,5 @@
-import { memo } from "react";
 import "./NavAnchor.css";
+import { memo } from "react";
 import { NavLink } from "react-router-dom";
 
 const NavAnchor = memo(({ className, to, icon, text }) => {

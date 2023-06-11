@@ -1,7 +1,7 @@
 .form {
   border-radius: 10px;
   display: flex;
-  gap: 30px;
+  gap: 20px;
 }
 
 .form.default {
@@ -21,8 +21,16 @@
 .form.composite {
   width: 40vw;
   min-height: 60vh;
-  padding: 8%;
+  padding: 60px 100px;
   animation: slideIn 1s 1;
+}
+
+.form.composite > *:first-child {
+  margin-bottom: auto;
+}
+
+.form.composite > *:last-child {
+  margin-top: auto;
 }
 
 @keyframes slideIn {

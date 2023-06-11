@@ -1,7 +1,7 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../contexts/authContext";
 import { updateTodo, deleteTodo } from "../../services/todo.service";
-import { ERROR_TODO } from "../../constants/error";
+import { ERROR_TODO } from "../../constants/message";
 import { useTodoContext } from "../../contexts/todoContext";
 import Checkbox from "../atoms/Checkbox";
 import Button from "../atoms/Button";

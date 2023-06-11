@@ -1,7 +1,7 @@
 import { useAuthContext } from "../contexts/authContext";
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { ERROR_AUTH } from "../constants/error";
+import { ALERT_AUTH } from "../constants/message";
 
 const Private = () => {
   const { getToken } = useAuthContext();
@@ -13,7 +13,7 @@ const Private = () => {
     if (location?.key === "default" && !token) {
       navigate("/signin", {
         replace: true,
-        state: { message: ERROR_AUTH.noToken },
+        state: { message: ALERT_AUTH.noToken },
       });
     }
   }, [location?.key, navigate, token]);

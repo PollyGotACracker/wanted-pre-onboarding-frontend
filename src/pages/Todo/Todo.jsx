@@ -1,16 +1,16 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import Header from "../../components/atoms/Header";
-import ListContainer from "../../components/modules/ListContainer";
-import TodoCount from "../../components/templates/TodoCount";
+import Spinner from "../../components/Spinner";
 import TodoForm from "../../components/templates/TodoForm";
-import TodoItem from "../../components/templates/TodoItem";
-import { ERROR_TODO } from "../../constants/error";
+import TodoList from "../../components/templates/TodoList";
+import { ERROR_TODO } from "../../constants/message";
 import { useAuthContext } from "../../contexts/authContext";
 import { useTodoContext } from "../../contexts/todoContext";
 import { getTodos, createTodo } from "../../services/todo.service";
 
 const Todo = () => {
-  const { data, setData, createData } = useTodoContext();
+  const { setData, createData } = useTodoContext();
+  const [isLoading, setIsLoading] = useState(true);
   const { getToken } = useAuthContext();
   const { token } = getToken();
   const [todo, setTodo] = useState("");
@@ -41,7 +41,10 @@ const Todo = () => {
       if (result) {
         const data = [...result].reverse();
         setData({ data: data });
-      } else window.alert(ERROR_TODO.get);
+        setTimeout(() => setIsLoading(false), 500);
+      } else {
+        window.alert(ERROR_TODO.get);
+      }
     },
     [token, getToken, setData]
   );
@@ -55,12 +58,7 @@ const Todo = () => {
         inputRef={todoRef}
         handler={onKeyDownClickCreate}
       />
-      <TodoCount />
-      <ListContainer
-        data={data}
-        id={"id"}
-        render={(props) => <TodoItem item={props} />}
-      />
+      {isLoading ? <Spinner loading={isLoading} /> : <TodoList />}
     </main>
   );
 };

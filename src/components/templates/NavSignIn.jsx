@@ -1,8 +1,9 @@
+import { memo } from "react";
 import NavAnchor from "../atoms/NavAnchor";
 import NavButton from "../atoms/NavButton";
 import { RiListCheck, RiLogoutBoxLine } from "react-icons/ri";
 
-const NavSignIn = ({ email, signOut }) => {
+const NavSignIn = memo(({ email, signOut }) => {
   return (
     <>
       <NavAnchor
@@ -20,6 +21,6 @@ const NavSignIn = ({ email, signOut }) => {
       />
     </>
   );
-};
+});
 
 export default NavSignIn;

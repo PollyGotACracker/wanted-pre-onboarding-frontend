@@ -1,6 +1,7 @@
+import { memo } from "react";
 import "./FormContainer.css";
 
-const FormContainer = ({ className, children }) => {
+const FormContainer = memo(({ className, children }) => {
   return (
     <form
       className={`form ${className}`}
@@ -11,7 +12,7 @@ const FormContainer = ({ className, children }) => {
       {children}
     </form>
   );
-};
+});
 
 export default FormContainer;
 

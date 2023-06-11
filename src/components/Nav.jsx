@@ -1,6 +1,7 @@
 import { memo, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/authContext";
+import NavAnchor from "./atoms/NavAnchor";
 import NavSignOut from "./templates/NavSignOut";
 import NavSignIn from "./templates/NavSignIn";
 import NavContainer from "./modules/NavContainer";
@@ -21,7 +22,15 @@ const Nav = memo(({ token, email }) => {
     if (token) return <NavSignIn email={email} signOut={signOut} />;
   }, [token, email, signOut]);
 
-  return <NavContainer>{navLinks}</NavContainer>;
+  return (
+    <NavContainer
+      render={({ className }) => (
+        <NavAnchor className={className} to={"/"} text={"My TodoList"} />
+      )}
+    >
+      {navLinks}
+    </NavContainer>
+  );
 });
 
 export default Nav;

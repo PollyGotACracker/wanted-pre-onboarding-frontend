@@ -4,12 +4,15 @@ import "./styles/index.css";
 import NavRouterProvider from "./Router";
 import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./contexts/authContext";
+import { MenuContextProvider } from "./contexts/menuContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <NavRouterProvider />
+      <MenuContextProvider>
+        <NavRouterProvider />
+      </MenuContextProvider>
     </AuthContextProvider>
   </React.StrictMode>
 );

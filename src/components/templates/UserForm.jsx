@@ -58,7 +58,6 @@ const SignForm = ({ header, dataset, text, onClick, message = "" }) => {
             className={"full"}
             name={"email"}
             placeholder={"이메일"}
-            autoComplete={"true"}
             type={"email"}
             value={email}
             onChange={onChangeInput}
@@ -72,7 +71,6 @@ const SignForm = ({ header, dataset, text, onClick, message = "" }) => {
             className={"full"}
             name={"password"}
             placeholder={"비밀번호"}
-            autoComplete={"false"}
             type={passwordType}
             value={password}
             onChange={onChangeInput}

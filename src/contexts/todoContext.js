@@ -36,7 +36,7 @@ const reducer = (state, action) => {
     }
 
     case TYPE.CREATE: {
-      const _data = [...state.data, action.item];
+      const _data = [action.item, ...state.data];
       return {
         ...state,
         data: [..._data],

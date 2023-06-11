@@ -1,0 +1,40 @@
+main.background-circle {
+  position: relative;
+}
+
+main.background-circle:after {
+  content: "";
+  background-color: var(--grayscale);
+  border-radius: 50%;
+  width: 40vw;
+  aspect-ratio: 1 / 1;
+  position: absolute;
+  left: calc(50% - 20vw);
+  top: calc(50% - 20vw);
+}
+
+main.background-circle:before {
+  content: "";
+  background-color: var(--border-color);
+  border-radius: 50%;
+  width: 30vw;
+  aspect-ratio: 1 / 1;
+  position: absolute;
+  left: calc(50% - 15vw);
+  top: calc(50% - 15vw);
+  box-shadow: 0 0 10px 20px var(--border-color);
+  transition: all 0.3s ease;
+  transform-origin: center;
+  animation: bounce 2.5s infinite ease;
+}
+
+@keyframes bounce {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}

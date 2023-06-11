@@ -16,25 +16,31 @@ const Todo = () => {
   const [todo, setTodo] = useState("");
   const todoRef = useRef(null);
 
-  const onChangeInput = useCallback((e) => setTodo(e.target.value), []);
+  const onChangeInput = useCallback(({ target }) => setTodo(target.value), []);
 
-  const onClickButton = useCallback(async () => {
-    if (todo.length < 1) return false;
-    const result = await createTodo({ token, todo });
-    if (result) {
-      createData({ item: result });
-      setTodo("");
-      todoRef.current.focus();
-    } else {
-      window.alert(ERROR_TODO.create);
-    }
-  }, [todo, token, createData]);
+  const onKeyDownClickCreate = useCallback(
+    async (e) => {
+      if (todo.length < 1) return false;
+      if (e.key === "Enter" || e.keyCode === 13 || e.type === "click") {
+        const result = await createTodo({ token, todo });
+        if (result) {
+          createData({ item: result });
+          setTodo("");
+          todoRef.current.focus();
+        } else {
+          window.alert(ERROR_TODO.create);
+        }
+      }
+    },
+    [todo, token, createData]
+  );
 
   useEffect(
     () => async () => {
       const result = await getTodos({ token });
       if (result) {
-        setData({ data: [...result] });
+        const data = [...result].reverse();
+        setData({ data: data });
       } else window.alert(ERROR_TODO.get);
     },
     [token, getToken, setData]
@@ -47,7 +53,7 @@ const Todo = () => {
         onChangeInput={onChangeInput}
         inputValue={todo}
         inputRef={todoRef}
-        onClickButton={onClickButton}
+        handler={onKeyDownClickCreate}
       />
       <TodoCount />
       <ListContainer

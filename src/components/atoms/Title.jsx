@@ -1,23 +1,23 @@
-import { useMemo } from "react";
+import { memo, useMemo } from "react";
 import "./Title.css";
 
-const Title = ({ main, sub }) => {
+const Title = memo(({ main, sub, delay }) => {
   const animation = useMemo(() => {
     return [...main, ...sub].map((item, index) => {
-      const delay = index * 0.6;
+      const itemDelay = index * delay;
       return (
         <div
           className={main.includes(item) ? "title text main" : "title text sub"}
           key={item}
-          style={{ animationDelay: `${delay}s` }}
+          style={{ animationDelay: `${itemDelay}s` }}
         >
           {item}
         </div>
       );
     });
-  }, [main, sub]);
+  }, [main, sub, delay]);
 
   return <div className="title container">{animation}</div>;
-};
+});
 
 export default Title;

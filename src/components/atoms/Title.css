@@ -42,3 +42,27 @@
     opacity: 1;
   }
 }
+
+@media only screen and (max-width: 500px) {
+  .title.container {
+    gap: 10px;
+  }
+  .title.text.main {
+    font-size: 4rem;
+  }
+  .title.text.sub {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  .title.container {
+    gap: 10px;
+  }
+  .title.text.main {
+    font-size: 2.5rem;
+  }
+  .title.text.sub {
+    font-size: 0.8rem;
+  }
+}

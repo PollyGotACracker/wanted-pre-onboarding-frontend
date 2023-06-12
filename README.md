@@ -10,6 +10,31 @@ npm install
 npm start
 ```
 
+## 영상
+
+### /home
+
+![home](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/c828ae21-773e-4604-975d-8b4008f56693)
+
+### /signup
+
+![signup](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/acd6e801-1f1d-425a-aa1f-27d1c9c99453)
+
+### /signin
+
+![signin](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/de2a5083-7468-44c5-b867-13067c61b4d9)
+
+### /todo
+
+![todo](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/ecbd31ad-7b8c-4a37-a3fd-f76a090d3bc1)
+
+### redirection
+
+- 로그인 하지 않은 상태에서 todo => signin 으로 이동
+  ![redirect_signin](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/801b5628-8160-4455-8016-6a632e8584bf)
+- 로그인 한 상태에서 signin 또는 signup => todo 로 이동
+  ![redirect_todo](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/82e61a99-78ae-4543-9497-4d0d309c4572)
+
 ## 공부
 
 ### redirection 오류

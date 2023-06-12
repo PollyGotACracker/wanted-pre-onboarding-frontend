@@ -1,19 +1,26 @@
-import "./NavContainer.css";
+import "./Nav.css";
 import { memo } from "react";
 import Button from "../atoms/Button";
 import { HiMenu } from "react-icons/hi";
 import { useMenuContext } from "../../contexts/menuContext";
 
-const NavContainer = memo(({ render, children }) => {
+const Nav = memo(({ render, children }) => {
   const { sidebarState, toggleSidebar } = useMenuContext();
+
+  const onClickButtons = (e) => {
+    const itemTag = e.target.tagName;
+    if (itemTag === "A" || itemTag === "BUTTON") toggleSidebar();
+  };
 
   return (
     <nav className="nav">
       {render({ className: "home" })}
-      <div className={`sidebar ${sidebarState}`}>{children}</div>
+      <div className={`sidebar ${sidebarState}`} onClick={onClickButtons}>
+        {children}
+      </div>
       <Button className="menu" onClick={toggleSidebar} icon={<HiMenu />} />
     </nav>
   );
 });
 
-export default NavContainer;
+export default Nav;

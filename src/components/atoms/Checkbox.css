@@ -12,7 +12,7 @@ label.checkbox svg {
   transition: all 0.2s ease;
 }
 label.checkbox svg:hover {
-  color: var(--primary);
+  color: var(--secondary);
 }
 span.checkbox.checked {
   color: var(--disabled);

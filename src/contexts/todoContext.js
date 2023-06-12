@@ -22,16 +22,17 @@ const TYPE = {
 };
 
 const reducer = (state, action) => {
+  const getCompleteCount = ({ data }) =>
+    data.filter((item) => item.isCompleted === true).length;
+
   switch (action.type) {
     case TYPE.SET: {
-      const _completeCount = action.data.filter(
-        (item) => item.isCompleted === true
-      );
+      const _completeCount = getCompleteCount({ data: action.data });
       return {
         ...state,
         data: [...action.data],
         allCount: action.data.length,
-        completeCount: _completeCount.length,
+        completeCount: _completeCount,
       };
     }
 
@@ -48,22 +49,22 @@ const reducer = (state, action) => {
       const _data = state.data.map((item) =>
         item.id === action.item.id ? action.item : item
       );
-      const _completeCount = _data.filter((item) => item.isCompleted === true);
+      const _completeCount = getCompleteCount({ data: _data });
       return {
         ...state,
         data: [..._data],
-        completeCount: _completeCount.length,
+        completeCount: _completeCount,
       };
     }
 
     case TYPE.DELETE: {
       const _data = state.data.filter((item) => item.id !== action.id);
-      const _completeCount = _data.filter((item) => item.isCompleted === true);
+      const _completeCount = getCompleteCount({ data: _data });
       return {
         ...state,
         data: [..._data],
         allCount: state.allCount - 1,
-        completeCount: _completeCount.length,
+        completeCount: _completeCount,
       };
     }
 

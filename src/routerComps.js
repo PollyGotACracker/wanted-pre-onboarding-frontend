@@ -1,9 +1,19 @@
 import App from "./App";
 import HomePage from "./pages/Home/HomePage";
+import Redirect from "./components/Redirect";
 import SignInPage from "./pages/User/SignInPage";
 import SignUpPage from "./pages/User/SignUpPage";
-import TodoPage from "./pages/Todo/TodoPage";
+import WrapTodo from "./pages/Todo/WrapTodo";
 import Private from "./components/Private";
-import NotFound from "./components/NotFound";
+import NotFound from "./pages/NotFound";
 
-export { App, HomePage, SignInPage, SignUpPage, TodoPage, Private, NotFound };
+export {
+  App,
+  HomePage,
+  Redirect,
+  SignInPage,
+  SignUpPage,
+  WrapTodo,
+  Private,
+  NotFound,
+};

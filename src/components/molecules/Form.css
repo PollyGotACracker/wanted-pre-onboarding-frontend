@@ -5,7 +5,11 @@
 }
 
 .form.default {
-  background-color: var(--grayscale);
+  background-color: var(--background-color);
+}
+
+.form.grayscale {
+  background-color: var(--dark-alpha);
 }
 
 .form.outlined {
@@ -19,10 +23,10 @@
 }
 
 .form.composite {
-  width: 40vw;
+  width: 500px;
   min-height: 60vh;
-  padding: 60px 100px;
-  animation: slideIn 1s 1;
+  padding: 60px 80px;
+  animation: form-slideIn 1s 1;
 }
 
 .form.composite > *:first-child {
@@ -33,7 +37,7 @@
   margin-top: auto;
 }
 
-@keyframes slideIn {
+@keyframes form-slideIn {
   0% {
     transform: translateY(-15px);
     opacity: 0.8;
@@ -62,8 +66,10 @@ main:has(.form.composite) {
   align-items: center;
 }
 
-@media only screen and (max-width: 1080px) {
+@media only screen and (max-width: 700px) {
   .form {
-    width: 80% !important;
+    width: 100% !important;
+    padding-left: 10% !important;
+    padding-right: 10% !important;
   }
 }

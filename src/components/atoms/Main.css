@@ -1,0 +1,75 @@
+main.main {
+  flex: 1;
+  margin-top: 50px;
+  padding: 3% 5% 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 50px;
+}
+
+main.main > * {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.main.point {
+  background-color: var(--background-point-color);
+}
+
+.main.circle {
+  position: relative;
+  justify-content: center;
+  --circle-delay: 0s;
+}
+
+.main.circle:after {
+  content: "";
+  background-color: var(--light-alpha);
+  border-radius: 50%;
+  width: 600px;
+  aspect-ratio: 1 / 1;
+  position: absolute;
+  left: calc(50% - 300px);
+  top: calc(50% - 300px);
+}
+
+.main.circle:before {
+  content: "";
+  background-color: var(--light-alpha);
+  border-radius: 50%;
+  width: 500px;
+  aspect-ratio: 1 / 1;
+  position: absolute;
+  left: calc(50% - 250px);
+  top: calc(50% - 250px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  transform-origin: center;
+  animation: main-bounce 2.5s infinite ease;
+  animation-delay: var(--circle-delay);
+}
+
+@keyframes main-bounce {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .main.circle:after {
+    width: 90vw;
+    left: calc(50% - 45vw);
+    top: calc(50% - 45vw);
+  }
+  .main.circle:before {
+    width: 80vw;
+    left: calc(50% - 40vw);
+    top: calc(50% - 40vw);
+  }
+}

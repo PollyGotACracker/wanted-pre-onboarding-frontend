@@ -19,21 +19,21 @@
   }
 
   .nav .signin,
-  .nav .signout {
+  .nav .signout,
+  .nav .signin.active {
     padding: 0;
     width: 80%;
     height: 50px;
     justify-content: center;
-    border: 0;
+    border: 0 !important;
     border-radius: 10px;
-    background-color: var(--grayscale);
+    background-color: var(--primary);
+    color: white;
+    transition: background-color 0.2s ease;
   }
 
-  .nav .signin.hover,
-  .nav .signin.active,
-  .nav .signin.hover {
-    border: 0;
-    background-color: var(--primary) !important;
-    color: white !important;
+  .nav .signin:hover,
+  .nav .signout:hover {
+    background-color: var(--secondary);
   }
 }

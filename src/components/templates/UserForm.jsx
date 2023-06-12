@@ -3,20 +3,19 @@ import Header from "../atoms/Header";
 import Label from "../atoms/Label";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
-import Spinner from "../Spinner";
-import AlertContainer from "../modules/AlertContainer";
-import FormContainer from "../modules/FormContainer";
+import Spinner from "../atoms/Spinner";
+import Alert from "../molecules/Alert";
+import Form from "../molecules/Form";
+import WrapInput from "../molecules/WrapInput";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { MdAlternateEmail, MdLock } from "react-icons/md";
-import LabelForContainer from "../modules/LabelForContainer";
 
 const SignForm = memo(
   ({ header, dataset, text, onClick, isLoading, message = "" }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordType, setPasswordType] = useState("password");
-    const [signMessage, setSignMessage] = useState("");
-    const [authMessage] = useState(message);
+    const [signMessage, setSignMessage] = useState(message);
     const [isInvalid, setIsInvalid] = useState(true);
 
     const onChangeInput = useCallback((e) => {
@@ -49,43 +48,43 @@ const SignForm = memo(
 
     return (
       <>
-        <AlertContainer text={authMessage ? authMessage : signMessage} />
-        <FormContainer className={"column default composite"}>
+        <Alert text={signMessage} />
+        <Form className={"column default composite"}>
           <Header text={header} />
-          <LabelForContainer>
+          <WrapInput>
             <Label htmlFor={"email"} icon={<MdAlternateEmail />} />
             <Input
               dataset={"email-input"}
               id={"email"}
               className={"full"}
               name={"email"}
-              placeholder={"이메일"}
+              placeholder={"user@email.com"}
               type={"email"}
               value={email}
               onChange={onChangeInput}
             />
-          </LabelForContainer>
-          <LabelForContainer>
+          </WrapInput>
+          <WrapInput>
             <Label htmlFor={"password"} icon={<MdLock />} />
             <Input
               dataset={"password-input"}
               id={"password"}
               className={"full"}
               name={"password"}
-              placeholder={"비밀번호"}
+              placeholder={"********"}
               type={passwordType}
               value={password}
               onChange={onChangeInput}
             />
-          </LabelForContainer>
+          </WrapInput>
           <Button
-            className={"secondary"}
+            className={"small"}
             onClick={PASSWORD[passwordType].click}
             icon={PASSWORD[passwordType].icon}
             text={PASSWORD[passwordType].text}
           />
           <Button
-            className={"primary full"}
+            className={"primary large"}
             dataset={dataset}
             onClick={async () => {
               const result = await onClick({ email, password });
@@ -100,7 +99,7 @@ const SignForm = memo(
               )
             }
           />
-        </FormContainer>
+        </Form>
       </>
     );
   }

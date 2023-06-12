@@ -1,7 +1,7 @@
 import { memo, useEffect, useState } from "react";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
-import FormContainer from "../modules/FormContainer";
+import Form from "../molecules/Form";
 
 const TodoForm = memo(({ onChangeInput, inputValue, inputRef, handler }) => {
   const [isDisabled, setIsDisabled] = useState(true);
@@ -11,7 +11,7 @@ const TodoForm = memo(({ onChangeInput, inputValue, inputRef, handler }) => {
   }, [inputValue]);
 
   return (
-    <FormContainer className={"row default simple"}>
+    <Form className={"row grayscale simple"}>
       <Input
         dataset={"new-todo-input"}
         className={"full"}
@@ -29,7 +29,7 @@ const TodoForm = memo(({ onChangeInput, inputValue, inputRef, handler }) => {
         disabled={isDisabled}
         className={"primary"}
       />
-    </FormContainer>
+    </Form>
   );
 });
 

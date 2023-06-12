@@ -1,8 +1,8 @@
-import "./AlertContainer.css";
+import "./Alert.css";
 import { memo, useRef } from "react";
 import { TbAlertTriangleFilled } from "react-icons/tb";
 
-const AlertContainer = memo(({ text }) => {
+const Alert = memo(({ text }) => {
   const alertRef = useRef();
 
   return (
@@ -16,4 +16,4 @@ const AlertContainer = memo(({ text }) => {
   );
 });
 
-export default AlertContainer;
+export default Alert;

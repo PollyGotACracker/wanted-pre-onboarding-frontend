@@ -3,13 +3,15 @@
 }
 
 .alert {
-  width: 100%;
   position: absolute;
-  top: 2%;
-  text-align: center;
+  top: 60px;
+  user-select: none;
+  word-break: keep-all;
   font-weight: 700;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   gap: 10px;
 }
 
@@ -19,9 +21,9 @@
 }
 
 .alert.hidden {
-  display: none;
+  visibility: hidden;
 }
 
 .alert.visible {
-  display: inline-flex;
+  visibility: visible;
 }

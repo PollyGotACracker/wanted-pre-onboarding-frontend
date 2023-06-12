@@ -1,7 +1,7 @@
 # [원티드 프리온보딩 - 프론트엔드](https://github.com/walking-sunset/selection-task)
 
-- 테스트 이메일: polly@test.com
-- 테스트 비밀번호: 12341234
+- 전유영
+- bitterns96@gmail.com
 
 ## 실행 방법
 

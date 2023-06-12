@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Main from "../../components/atoms/Main";
 import SignForm from "../../components/templates/UserForm";
 import { ALERT_AUTH, ERROR_AUTH } from "../../constants/message";
 import { signUp } from "../../services/auth.service";
@@ -21,7 +22,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <main className="signUp">
+    <Main className={"sign-up"} color={"point"}>
       <SignForm
         header={"Sign Up"}
         dataset={"signup-button"}
@@ -29,7 +30,7 @@ const SignUpPage = () => {
         onClick={onClickSignUp}
         isLoading={isLoading}
       />
-    </main>
+    </Main>
   );
 };
 export default SignUpPage;

@@ -7,12 +7,12 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
-  width: 7rem;
+  min-width: 7rem;
   padding: 10px;
   white-space: nowrap;
   user-select: none;
   outline: none;
-  transition: color 0.2s ease, border 0.2s ease;
+  transition: color 0.2s ease;
   border-top: 5px solid transparent;
   border-bottom: 5px solid transparent;
 }

@@ -1,4 +1,4 @@
-.Todo .list {
+.todo .list {
   animation: list-fadeIn 0.2s ease;
 }
 
@@ -11,7 +11,7 @@
   }
 }
 
-.Todo .count {
+.todo .count {
   width: 100%;
   padding: 10px;
   color: var(--font-sub-color);
@@ -20,6 +20,7 @@
   align-items: center;
   gap: 5px;
 }
-.Todo .count svg {
+
+.todo .count svg {
   font-size: 1.2rem;
 }

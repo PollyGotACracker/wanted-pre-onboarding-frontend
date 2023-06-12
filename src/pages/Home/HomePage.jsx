@@ -1,4 +1,4 @@
-import Background from "../../components/atoms/Background";
+import Main from "../../components/atoms/Main";
 import Title from "../../components/atoms/Title";
 
 const HomePage = () => {
@@ -11,9 +11,14 @@ const HomePage = () => {
   );
 
   return (
-    <Background type={"circle"} delay={backgoundDelay}>
+    <Main
+      className={"home"}
+      type={"circle"}
+      color={"point"}
+      delay={backgoundDelay}
+    >
       <Title main={main} sub={sub} delay={titleDelay} />
-    </Background>
+    </Main>
   );
 };
 

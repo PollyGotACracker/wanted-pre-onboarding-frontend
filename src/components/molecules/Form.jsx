@@ -1,7 +1,7 @@
 import { memo } from "react";
-import "./FormContainer.css";
+import "./Form.css";
 
-const FormContainer = memo(({ className, children }) => {
+const Form = memo(({ className, children }) => {
   return (
     <form
       className={`form ${className}`}
@@ -14,8 +14,8 @@ const FormContainer = memo(({ className, children }) => {
   );
 });
 
-export default FormContainer;
+export default Form;
 
-FormContainer.defaultProps = {
+Form.defaultProps = {
   className: "",
 };

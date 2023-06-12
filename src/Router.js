@@ -2,9 +2,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   App,
   HomePage,
+  Redirect,
   SignInPage,
   SignUpPage,
-  TodoPage,
+  WrapTodo,
   Private,
   NotFound,
 } from "./routerComps.js";
@@ -16,14 +17,17 @@ const NavRouter = createBrowserRouter([
     children: [
       { path: "", element: <HomePage /> },
       {
-        path: "signin",
-        element: <SignInPage />,
+        path: "",
+        element: <Redirect />,
+        children: [
+          { path: "signin", element: <SignInPage /> },
+          { path: "signup", element: <SignUpPage /> },
+        ],
       },
-      { path: "signup", element: <SignUpPage /> },
       {
         path: "todo",
         element: <Private />,
-        children: [{ path: "", element: <TodoPage /> }],
+        children: [{ path: "", element: <WrapTodo /> }],
       },
       { path: "*", element: <NotFound /> },
     ],

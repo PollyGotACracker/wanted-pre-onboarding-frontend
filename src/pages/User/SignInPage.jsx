@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Main from "../../components/atoms/Main";
 import { useLocation, useNavigate } from "react-router-dom";
 import SignForm from "../../components/templates/UserForm";
 import { ERROR_AUTH } from "../../constants/message";
@@ -6,10 +7,10 @@ import { useAuthContext } from "../../contexts/authContext";
 import { signIn } from "../../services/auth.service";
 
 const SignInPage = () => {
+  const { setToken, userSignIn } = useAuthContext();
   const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
-  const { setToken, userSignIn } = useAuthContext();
 
   const onClickSignIn = async ({ email, password }) => {
     setIsLoading(true);
@@ -25,7 +26,7 @@ const SignInPage = () => {
   };
 
   return (
-    <main className="signIn">
+    <Main className={"sign-in"} color={"point"}>
       <SignForm
         header={"Sign In"}
         dataset={"signin-button"}
@@ -34,7 +35,7 @@ const SignInPage = () => {
         isLoading={isLoading}
         message={location?.state?.message || ""}
       />
-    </main>
+    </Main>
   );
 };
 export default SignInPage;

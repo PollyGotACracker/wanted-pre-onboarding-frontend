@@ -1,18 +1,14 @@
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, memo } from "react";
 import Header from "../../components/atoms/Header";
-import Spinner from "../../components/Spinner";
-import TodoForm from "../../components/templates/TodoForm";
-import TodoList from "../../components/templates/TodoList";
+import Spinner from "../../components/atoms/Spinner";
+import TodoForm from "../../components/organisms/TodoForm";
+import TodoList from "../../components/organisms/TodoList";
 import { ERROR_TODO } from "../../constants/message";
-import { useAuthContext } from "../../contexts/authContext";
 import { useTodoContext } from "../../contexts/todoContext";
-import { getTodos, createTodo } from "../../services/todo.service";
+import { createTodo } from "../../services/todo.service";
 
-const Todo = () => {
-  const { setData, createData } = useTodoContext();
-  const [isLoading, setIsLoading] = useState(true);
-  const { getToken } = useAuthContext();
-  const { token } = getToken();
+const TodoContent = memo(({ isLoading, token }) => {
+  const { createData } = useTodoContext();
   const [todo, setTodo] = useState("");
   const todoRef = useRef(null);
 
@@ -35,22 +31,8 @@ const Todo = () => {
     [todo, token, createData]
   );
 
-  useEffect(
-    () => async () => {
-      const result = await getTodos({ token });
-      if (result) {
-        const data = [...result].reverse();
-        setData({ data: data });
-        setTimeout(() => setIsLoading(false), 500);
-      } else {
-        window.alert(ERROR_TODO.get);
-      }
-    },
-    [token, getToken, setData]
-  );
-
   return (
-    <main className="Todo">
+    <>
       <Header text={"To Do"} />
       <TodoForm
         onChangeInput={onChangeInput}
@@ -59,7 +41,8 @@ const Todo = () => {
         handler={onKeyDownClickCreate}
       />
       {isLoading ? <Spinner loading={isLoading} /> : <TodoList />}
-    </main>
+    </>
   );
-};
-export default Todo;
+});
+
+export default TodoContent;

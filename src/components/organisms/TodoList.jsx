@@ -1,8 +1,8 @@
 import "./TodoList.css";
 import { useTodoContext } from "../../contexts/todoContext";
 import { RiCheckFill } from "react-icons/ri";
-import ListContainer from "../../components/modules/ListContainer";
-import TodoItem from "../../components/templates/TodoItem";
+import List from "../../components/molecules/List";
+import TodoItem from "../../components/organisms/TodoItem";
 
 const TodoList = () => {
   const { data } = useTodoContext();
@@ -16,7 +16,7 @@ const TodoList = () => {
         <span> / </span>
         <span>{allCount}</span>
       </div>
-      <ListContainer
+      <List
         data={data}
         id={"id"}
         render={(props) => <TodoItem item={props} />}

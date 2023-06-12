@@ -17,10 +17,12 @@
 :root {
   --font-default: "NanumSquareNeo-Variable";
   --font-header: "TheJamsil5Bold";
-  --primary: #1e2f97;
+  --primary: #4e5fca;
   --secondary: #e69215;
-  --grayscale: rgba(0, 0, 0, 0.08);
+  --dark-alpha: rgba(0, 0, 0, 0.08);
+  --light-alpha: rgba(255, 255, 255, 0.4);
   --background-color: #faf9f7;
+  --background-point-color: #4e5fca;
   --sidebar-color: #faf9f7;
   --disabled: rgba(0, 0, 0, 0.5);
   --font-color: #181818;

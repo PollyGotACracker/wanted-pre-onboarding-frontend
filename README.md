@@ -47,6 +47,11 @@ _/todo 에서 바로 로그아웃하면 메인 화면이 아닌 로그인 화면
 - 주소창에 직접 접속했을 때와 다른 페이지에서 이동했을 때 각각 default 와 history 에 따른 위치 고유 문자열을 반환했다.
 - `(location?.key === "default" && !token)` 조건이 참일 경우 redirect 되도록 코드를 변경하였다.
 
-## react element 를 props 로 전달
+### react element 를 props 로 전달
 
 - `render` props 로 element 를 return 하는 함수를 전달
+
+### 배포 후 문제
+
+- 새로고침 시 404 오류 : [create react app 공식 문서 참조](https://create-react-app.dev/docs/deployment/#notes-on-client-side-routing)
+- 해결 못함: local 에서 실행한 것과 달리, github 로 배포할 경우 component 가 unmount 될 때 todo 데이터를 반환하여 실제 표시할 component 에서는 데이터를 표시할 수 없었음

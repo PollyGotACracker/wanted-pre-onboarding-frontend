@@ -79,7 +79,7 @@ const TodoItem = memo(({ item }) => {
   }, [isModify]);
 
   return (
-    <div>
+    <li>
       <Checkbox
         checked={todoItem.isCompleted}
         onChange={onChangeCheck}
@@ -95,7 +95,7 @@ const TodoItem = memo(({ item }) => {
         onClick={BUTTON[isModify].secondAction}
         text={BUTTON[isModify].secondText}
       />
-    </div>
+    </li>
   );
 });
 

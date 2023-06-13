@@ -1,9 +1,9 @@
-import { useAuthContext } from "../contexts/authContext";
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useAuthContext } from "../contexts/authContext";
 import { ALERT_AUTH } from "../constants/message";
 
-const Private = () => {
+const RedirectNoToken = () => {
   const { getToken } = useAuthContext();
   const { token } = getToken();
   const location = useLocation();
@@ -20,4 +20,4 @@ const Private = () => {
   return token && <Outlet />;
 };
 
-export default Private;
+export default RedirectNoToken;

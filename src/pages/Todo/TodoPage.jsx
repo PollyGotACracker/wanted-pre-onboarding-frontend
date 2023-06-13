@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Main from "../../components/atoms/Main";
 import TodoContent from "../../components/templates/TodoContent";
 import { useAuthContext } from "../../contexts/authContext";
@@ -12,7 +12,7 @@ const TodoPage = () => {
   const { getToken } = useAuthContext();
   const { token } = getToken();
 
-  const initData = async () => {
+  const initData = useCallback(async () => {
     const result = await getTodos({ token });
     if (result) {
       const data = [...result].reverse();
@@ -21,11 +21,11 @@ const TodoPage = () => {
     } else {
       window.alert(ERROR_TODO.get);
     }
-  };
+  }, [setData, token]);
 
   useEffect(() => {
     initData();
-  }, [token, getToken, setData]);
+  }, [initData, token, getToken, setData]);
 
   return (
     <Main className={"todo"}>

@@ -57,7 +57,11 @@ _/todo 에서 바로 로그아웃하면 메인 화면이 아닌 로그인 화면
 
 ### 배포 후 문제
 
-- 새로고침 시 404 오류 : [create react app 공식 문서 참조](https://create-react-app.dev/docs/deployment/#notes-on-client-side-routing)
+- 새로고침 시 404 오류 :
+
+  - [create react app 공식 문서 참조](https://create-react-app.dev/docs/deployment/#notes-on-client-side-routing)
+  - [index.html](https://github.com/rafgraph/spa-github-pages/blob/gh-pages/index.html#L36-L57)
+  - [404.html](https://github.com/rafgraph/spa-github-pages/blob/gh-pages/404.html#L6-L36)
 
 - local 에서 실행한 것과 달리, github 로 배포할 경우 todo component 가 unmount 될 때 데이터를 반환: fetch 함수가 포함된 useEffect 의 코드를 별도의 함수로 분리하여 선언하였다.
   - 오류 원인 코드

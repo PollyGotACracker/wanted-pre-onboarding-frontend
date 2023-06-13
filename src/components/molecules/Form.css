@@ -4,6 +4,14 @@
   gap: 20px;
 }
 
+.form * {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.form input[type="password"]::-ms-reveal {
+  display: none;
+}
+
 .form.default {
   background-color: var(--background-color);
 }

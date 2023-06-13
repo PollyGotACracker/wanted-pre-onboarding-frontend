@@ -13,6 +13,7 @@
   user-select: none;
   outline: none;
   transition: color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-button:hover {

@@ -4,10 +4,6 @@
   flex-direction: column;
 }
 
-.list .item:hover {
-  background-color: var(--dark-alpha);
-}
-
 .list .item > * {
   display: flex;
   align-items: center;

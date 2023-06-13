@@ -12,19 +12,20 @@ const TodoPage = () => {
   const { getToken } = useAuthContext();
   const { token } = getToken();
 
-  useEffect(
-    () => async () => {
-      const result = await getTodos({ token });
-      if (result) {
-        const data = [...result].reverse();
-        setData({ data: data });
-        setTimeout(() => setIsLoading(false), 500);
-      } else {
-        window.alert(ERROR_TODO.get);
-      }
-    },
-    [token, getToken, setData]
-  );
+  const initData = async () => {
+    const result = await getTodos({ token });
+    if (result) {
+      const data = [...result].reverse();
+      setData({ data: data });
+      setTimeout(() => setIsLoading(false), 500);
+    } else {
+      window.alert(ERROR_TODO.get);
+    }
+  };
+
+  useEffect(() => {
+    initData();
+  }, [token, getToken, setData]);
 
   return (
     <Main className={"todo"}>

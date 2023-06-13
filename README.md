@@ -3,6 +3,10 @@
 - 전유영
 - bitterns96@gmail.com
 
+## 배포 주소
+
+- [https://mytodolist.kr/](https://mytodolist.kr/)
+
 ## 실행 방법
 
 ```shell

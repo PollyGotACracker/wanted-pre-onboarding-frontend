@@ -2,11 +2,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   App,
   HomePage,
-  Redirect,
   SignInPage,
   SignUpPage,
   WrapTodo,
-  Private,
+  RedirectNoToken,
+  RedirectToken,
   NotFound,
 } from "./routerComps.js";
 
@@ -19,7 +19,7 @@ const NavRouter = createBrowserRouter(
         { path: "", element: <HomePage /> },
         {
           path: "",
-          element: <Redirect />,
+          element: <RedirectToken />,
           children: [
             { path: "signin", element: <SignInPage /> },
             { path: "signup", element: <SignUpPage /> },
@@ -27,7 +27,7 @@ const NavRouter = createBrowserRouter(
         },
         {
           path: "todo",
-          element: <Private />,
+          element: <RedirectNoToken />,
           children: [{ path: "", element: <WrapTodo /> }],
         },
         { path: "*", element: <NotFound /> },

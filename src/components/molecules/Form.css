@@ -30,15 +30,15 @@
   padding: 15px;
 }
 
-.form.simple > .input {
-  max-width: 100%;
-}
-
 .form.composite {
   width: 500px;
   min-height: 60vh;
   padding: 60px 80px;
   animation: form-slideIn 1s 1;
+}
+
+.form.composite .input {
+  max-width: 100%;
 }
 
 .form.composite > *:first-child {

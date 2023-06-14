@@ -1,7 +1,8 @@
-# [원티드 프리온보딩 - 프론트엔드](https://github.com/walking-sunset/selection-task)
+# [원티드 프리온보딩 인턴십 - 프론트엔드 사전과제](https://github.com/walking-sunset/selection-task)
 
 - 전유영
 - bitterns96@gmail.com
+- 2023.06.08 ~ 2023.06.14
 
 ## 배포 주소
 
@@ -9,8 +10,25 @@
 
 ## 실행 방법
 
-```shell
+1. 프로젝트를 로컬 저장소에 복제
+
+- 디렉토리로 이동한 후 git bash 또는 터미널에서 다음 명령어 실행
+
+```bash
+git clone https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend.git
+```
+
+2. dependency 설치
+
+- Visual Studio Code terminal 에서 다음 명령어 실행
+
+```bash
 npm install
+```
+
+3. 로컬 환경에서 프로젝트 실행
+
+```bash
 npm start
 ```
 
@@ -18,26 +36,30 @@ npm start
 
 ### /home
 
-![home](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/c828ae21-773e-4604-975d-8b4008f56693)
+![home](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/711e4f0a-bb6d-4295-a991-808e244dace0)
 
 ### /signup
 
-![signup](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/acd6e801-1f1d-425a-aa1f-27d1c9c99453)
+![signup](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/44a267ad-2172-4459-936f-55f641a2e1f2)
 
 ### /signin
 
-![signin](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/de2a5083-7468-44c5-b867-13067c61b4d9)
+![signin](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/300732a5-72d8-4ee5-9467-0685e1996884)
 
 ### /todo
 
-![todo](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/ecbd31ad-7b8c-4a37-a3fd-f76a090d3bc1)
+![todo](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/88f412c6-2e24-42c5-8a40-ce4cff454f22)
 
 ### redirection
 
 - 로그인 하지 않은 상태에서 todo => signin 으로 이동
-  ![redirect_signin](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/801b5628-8160-4455-8016-6a632e8584bf)
+  ![redirect_signin](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/cf9a08a4-c65a-4caa-82dd-c29c1a515a39)
 - 로그인 한 상태에서 signin 또는 signup => todo 로 이동
-  ![redirect_todo](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/82e61a99-78ae-4543-9497-4d0d309c4572)
+  ![redirect_todo](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/7d5cd4e0-fc62-495b-a4ec-7552cd140bc9)
+
+### responsive
+
+![responsive](https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend/assets/92136750/c2ebda3e-7ea5-4e6b-b69d-a27af85ef7d4)
 
 ## 공부
 

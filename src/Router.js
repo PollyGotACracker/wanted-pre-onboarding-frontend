@@ -4,7 +4,7 @@ import {
   HomePage,
   SignInPage,
   SignUpPage,
-  WrapTodo,
+  TodoPage,
   RedirectNoToken,
   RedirectToken,
   NotFound,
@@ -28,7 +28,7 @@ const NavRouter = createBrowserRouter(
         {
           path: "todo",
           element: <RedirectNoToken />,
-          children: [{ path: "", element: <WrapTodo /> }],
+          children: [{ path: "", element: <TodoPage /> }],
         },
         { path: "*", element: <NotFound /> },
       ],

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Main from "../../components/atoms/Main";
 import { useLocation, useNavigate } from "react-router-dom";
-import SignForm from "../../components/templates/UserForm";
+import UserForm from "../../components/templates/UserForm";
 import { ERROR_AUTH } from "../../constants/message";
 import { useAuthContext } from "../../contexts/authContext";
 import { signIn } from "../../services/auth.service";
@@ -12,7 +12,7 @@ const SignInPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const onClickSignIn = async ({ email, password }) => {
+  const onClickSubmit = async ({ email, password }) => {
     setIsLoading(true);
     const token = await signIn({ email, password });
     if (token) {
@@ -27,11 +27,9 @@ const SignInPage = () => {
 
   return (
     <Main className={"sign-in"} color={"point"}>
-      <SignForm
-        header={"Sign In"}
-        dataset={"signin-button"}
-        text={"로그인"}
-        onClick={onClickSignIn}
+      <UserForm
+        type={"signIn"}
+        onClickSubmit={onClickSubmit}
         isLoading={isLoading}
         message={location?.state?.message || ""}
       />

@@ -16,21 +16,25 @@ const TodoItem = memo(({ item }) => {
   const [isModify, setIsModify] = useState(false);
   const todoRef = useRef(null);
 
-  const onChangeCheck = () =>
-    setTodoItem((prev) => {
-      const changed = { ...todoItem, isCompleted: !prev.isCompleted };
-      onClickUpdate({ item: changed });
-      return changed;
-    });
-
   const onChangeInput = (e) =>
     setTodoItem({ ...todoItem, todo: e.target.value });
 
-  const onClickUpdate = async ({ item }) => {
-    const result = await updateTodo({ token, item });
+  const onClickUpdate = async ({ modified }) => {
+    if (modified.todo.length < 1) {
+      setTodoItem({ ...todoItem, todo: item.todo });
+      return false;
+    }
+    const result = await updateTodo({ token, item: modified });
     if (!result) window.alert(ERROR_TODO.update);
-    else updateData({ item });
+    else updateData({ item: modified });
   };
+
+  const onChangeCheck = () =>
+    setTodoItem((prev) => {
+      const changed = { ...todoItem, isCompleted: !prev.isCompleted };
+      onClickUpdate({ modified: changed });
+      return changed;
+    });
 
   const onClickDelete = async () => {
     const result = await deleteTodo({ token, id: todoItem.id });
@@ -64,7 +68,7 @@ const TodoItem = memo(({ item }) => {
     true: {
       firstDataset: "submit-button",
       firstAction: () => {
-        onClickUpdate({ item: todoItem });
+        onClickUpdate({ modified: todoItem });
         setIsModify(false);
       },
       firstText: "제출",

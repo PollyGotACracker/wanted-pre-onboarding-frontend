@@ -26,8 +26,8 @@
 
 .form.simple {
   width: 100%;
-  height: 10vh;
-  padding: 2%;
+  min-height: 4rem;
+  padding: 15px;
 }
 
 .form.composite {
@@ -56,7 +56,7 @@
   }
 }
 
-main:has(.form.composite) {
+.main:has(.form.composite) {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,6 +66,11 @@ main:has(.form.composite) {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.form.row > * {
+  height: 40px;
 }
 
 .form.column {
@@ -78,12 +83,8 @@ main:has(.form.composite) {
   .form {
     width: 100% !important;
   }
+
   .form.composite {
-    padding-left: 10% !important;
-    padding-right: 10% !important;
-  }
-  .form.simple {
-    padding-left: 5% !important;
-    padding-right: 5% !important;
+    padding: 15% 10% !important;
   }
 }

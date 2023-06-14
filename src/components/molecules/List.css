@@ -13,6 +13,11 @@
   min-height: 60px;
   flex-wrap: wrap;
   border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.3s ease;
+}
+
+.list .item .button:hover {
+  color: inherit;
 }
 
 .list .item span {
@@ -36,4 +41,14 @@
 .list .item-exit-active {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+}
+
+@media (hover: hover) {
+  .list .item > *:hover {
+    background-color: var(--dark-alpha);
+  }
+
+  .list .item .button:hover {
+    color: var(--secondary);
+  }
 }

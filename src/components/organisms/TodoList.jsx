@@ -9,7 +9,7 @@ const TodoList = () => {
   const { allCount, completeCount } = useTodoContext();
 
   return (
-    <div className="list">
+    <div className="list-container">
       <div className="count">
         <RiCheckFill />
         <span>{completeCount}</span>

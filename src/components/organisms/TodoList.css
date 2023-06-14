@@ -1,4 +1,5 @@
-.todo .list {
+.todo .list-container {
+  width: 100%;
   animation: list-fadeIn 0.2s ease;
 }
 

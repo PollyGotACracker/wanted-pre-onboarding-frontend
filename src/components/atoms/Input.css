@@ -19,7 +19,7 @@
 }
 
 .input.full {
-  max-width: 100%;
+  flex: 1;
   flex-shrink: 1;
   flex-grow: 1;
 }

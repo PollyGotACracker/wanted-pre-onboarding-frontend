@@ -43,7 +43,7 @@
   transition: opacity 0.5s ease-in-out;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .list .item > *:hover {
     background-color: var(--dark-alpha);
   }

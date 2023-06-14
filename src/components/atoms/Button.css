@@ -14,6 +14,7 @@
   outline: none;
   transition: all 0.2s ease;
   -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
 }
 
 .button svg {

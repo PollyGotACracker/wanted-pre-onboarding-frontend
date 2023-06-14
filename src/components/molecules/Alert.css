@@ -1,14 +1,7 @@
-*:has(.alert) {
-  position: relative;
-}
-
 .alert {
-  position: absolute;
-  top: 60px;
   user-select: none;
   word-break: keep-all;
   font-weight: 700;
-  display: inline-flex;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -21,9 +14,9 @@
 }
 
 .alert.hidden {
-  visibility: hidden;
+  display: none;
 }
 
 .alert.visible {
-  visibility: visible;
+  display: inline-flex;
 }

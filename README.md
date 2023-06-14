@@ -12,7 +12,7 @@
 
 1. 프로젝트를 로컬 저장소에 복제
 
-- 디렉토리로 이동한 후 git bash 또는 터미널에서 다음 명령어 실행
+- 디렉토리로 이동한 후 Git bash 또는 terminal 에서 다음 명령어 실행
 
 ```bash
 git clone https://github.com/PollyGotACracker/wanted-pre-onboarding-frontend.git
@@ -76,6 +76,11 @@ _/todo 에서 바로 로그아웃하면 메인 화면이 아닌 로그인 화면
 ### react element 를 props 로 전달
 
 - `render` props 로 element 를 return 하는 함수를 전달
+
+### 상단 navigation 과 측면 sidebar 를 분리할 것
+
+- 부모 요소의 z-index 값은 자식 요소에 영향을 미친다.
+- 따라서 만약 nav 가 sidebar 의 부모 요소일 경우, 화면 blocker 가 active 될 때 sidebar 만 blocker 위로 올릴 수 없게 된다.
 
 ### 배포 후 문제
 

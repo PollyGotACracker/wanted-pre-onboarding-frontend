@@ -1,26 +1,26 @@
-.nav .signup,
-.nav .user-email {
+.sidebar .signup,
+.sidebar .user-email {
   margin-left: auto;
 }
 
-.nav .user-email {
+.sidebar .user-email {
   font-size: 0.8em;
 }
 
 @media only screen and (max-width: 1080px) {
-  .nav .signup,
-  .nav .user-email {
+  .sidebar .signup,
+  .sidebar .user-email {
     margin-left: 0;
   }
 
-  .nav .user-email,
-  .nav .signin {
+  .sidebar .user-email,
+  .sidebar .signin {
     margin-top: auto;
   }
 
-  .nav .signin,
-  .nav .signout,
-  .nav .signin.active {
+  .sidebar .signin,
+  .sidebar .signout,
+  .sidebar .signin.active {
     padding: 0;
     width: 80%;
     height: 50px;
@@ -32,8 +32,8 @@
     transition: background-color 0.2s ease;
   }
 
-  .nav .signin:hover,
-  .nav .signout:hover {
+  .sidebar .signin:hover,
+  .sidebar .signout:hover {
     background-color: var(--secondary);
   }
 }

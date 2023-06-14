@@ -6,6 +6,7 @@
 
 .form * {
   -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
 }
 
 .form input[type="password"]::-ms-reveal {

@@ -1,6 +1,7 @@
 input.checkbox {
   display: none;
   -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
 }
 label.checkbox {
   display: inline-flex;

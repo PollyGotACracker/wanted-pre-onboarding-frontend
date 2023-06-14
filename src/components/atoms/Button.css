@@ -6,7 +6,7 @@
   align-items: center;
   gap: 8px;
   white-space: nowrap;
-  padding: 10px;
+  padding: 5px;
   border: none;
   border-radius: 10px;
   background-color: transparent;
@@ -33,7 +33,6 @@
 
 .button.primary {
   min-width: 100px;
-  min-height: calc(1rem + 2px);
   letter-spacing: 0.1em;
 }
 
@@ -53,7 +52,7 @@
 
 .button.large {
   width: 100%;
-  min-height: 60px;
+  min-height: 50px;
   padding: 1em 0;
 }
 

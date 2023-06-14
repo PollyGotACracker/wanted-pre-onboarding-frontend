@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../contexts/authContext";
 import { updateTodo, deleteTodo } from "../../services/todo.service";
 import { ERROR_TODO } from "../../constants/message";
@@ -15,33 +15,43 @@ const TodoItem = memo(({ item }) => {
   const [todoItem, setTodoItem] = useState({ ...item });
   const [isModify, setIsModify] = useState(false);
   const todoRef = useRef(null);
+  const itemRef = useRef(null);
 
-  const onChangeInput = (e) =>
-    setTodoItem({ ...todoItem, todo: e.target.value });
+  const onChangeInput = useCallback(
+    (e) => setTodoItem({ ...todoItem, todo: e.target.value }),
+    [todoItem]
+  );
 
-  const onClickUpdate = async ({ modified }) => {
-    if (modified.todo.length < 1) {
-      setTodoItem({ ...todoItem, todo: item.todo });
-      return false;
-    }
-    const result = await updateTodo({ token, item: modified });
-    if (!result) window.alert(ERROR_TODO.update);
-    else updateData({ item: modified });
-  };
+  const onClickUpdate = useCallback(
+    async ({ modified }) => {
+      if (modified.todo.length < 1) {
+        setTodoItem({ ...todoItem, todo: item.todo });
+        return false;
+      }
+      const result = await updateTodo({ token, item: modified });
+      if (!result) window.alert(ERROR_TODO.update);
+      else updateData({ item: modified });
+    },
+    [item.todo, todoItem, token, updateData]
+  );
 
-  const onChangeCheck = () =>
-    setTodoItem((prev) => {
-      const changed = { ...todoItem, isCompleted: !prev.isCompleted };
-      onClickUpdate({ modified: changed });
-      return changed;
-    });
+  const onChangeCheck = useCallback(
+    () =>
+      setTodoItem((prev) => {
+        const changed = { ...todoItem, isCompleted: !prev.isCompleted };
+        onClickUpdate({ modified: changed });
+        return changed;
+      }),
+    [onClickUpdate, todoItem]
+  );
 
-  const onClickDelete = async () => {
+  const onClickDelete = useCallback(async () => {
     const result = await deleteTodo({ token, id: todoItem.id });
     if (result) {
-      deleteData({ id: todoItem.id });
+      itemRef.current.style.pointerEvents = "none";
+      await deleteData({ id: todoItem.id });
     } else window.alert(ERROR_TODO.delete);
-  };
+  }, [deleteData, todoItem.id, token]);
 
   const TEXT = {
     false: <span>{todoItem.todo}</span>,
@@ -83,7 +93,7 @@ const TodoItem = memo(({ item }) => {
   }, [isModify]);
 
   return (
-    <li>
+    <li ref={itemRef}>
       <Checkbox
         checked={todoItem.isCompleted}
         onChange={onChangeCheck}

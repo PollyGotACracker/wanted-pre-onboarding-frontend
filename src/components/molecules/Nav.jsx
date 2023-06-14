@@ -1,5 +1,5 @@
 import "./Nav.css";
-import { memo } from "react";
+import { memo, useCallback } from "react";
 import Button from "../atoms/Button";
 import { HiMenu } from "react-icons/hi";
 import { useMenuContext } from "../../contexts/menuContext";
@@ -7,10 +7,13 @@ import { useMenuContext } from "../../contexts/menuContext";
 const Nav = memo(({ render, children }) => {
   const { sidebarState, toggleSidebar } = useMenuContext();
 
-  const onClickButtons = (e) => {
-    const itemTag = e.target.tagName;
-    if (itemTag === "A" || itemTag === "BUTTON") toggleSidebar();
-  };
+  const onClickButtons = useCallback(
+    (e) => {
+      const itemTag = e.target.tagName;
+      if (itemTag === "A" || itemTag === "BUTTON") toggleSidebar();
+    },
+    [toggleSidebar]
+  );
 
   return (
     <>

@@ -83,7 +83,10 @@ const TodoItem = memo(({ item }) => {
       },
       firstText: "제출",
       secondDataset: "cancel-button",
-      secondAction: () => setIsModify(false),
+      secondAction: () => {
+        setTodoItem({ ...todoItem, todo: item.todo });
+        setIsModify(false);
+      },
       secondText: "취소",
     },
   };

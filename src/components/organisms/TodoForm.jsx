@@ -1,13 +1,11 @@
-import { useCallback, useRef, memo, useEffect, useState } from "react";
+import { useCallback, useRef, useEffect, useState } from "react";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
 import Form from "../molecules/Form";
-import { ERROR_TODO } from "../../constants/message";
 import { useTodoContext } from "../../contexts/todoContext";
-import { createTodo } from "../../services/todo.service";
 
-const TodoForm = memo(({ token }) => {
-  const { createData } = useTodoContext();
+const TodoForm = () => {
+  const { createTodo, createData } = useTodoContext();
   const [isDisabled, setIsDisabled] = useState(true);
   const [todo, setTodo] = useState("");
   const todoRef = useRef(null);
@@ -18,17 +16,15 @@ const TodoForm = memo(({ token }) => {
     async (e) => {
       if (todo.length < 1) return false;
       if (e.key === "Enter" || e.keyCode === 13 || e.type === "click") {
-        const result = await createTodo({ token, todo });
+        const result = await createTodo(todo);
         if (result) {
-          createData({ item: result });
+          createData(result);
           setTodo("");
           todoRef.current.focus();
-        } else {
-          window.alert(ERROR_TODO.create);
         }
       }
     },
-    [todo, token, createData]
+    [todo, createTodo, createData]
   );
 
   useEffect(() => {
@@ -56,6 +52,6 @@ const TodoForm = memo(({ token }) => {
       />
     </Form>
   );
-});
+};
 
 export default TodoForm;

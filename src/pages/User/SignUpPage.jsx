@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import Main from "../../components/atoms/Main";
 import UserForm from "../../components/templates/UserForm";
 import { ALERT_AUTH, ERROR_AUTH } from "../../constants/message";
-import { signUp } from "../../services/auth.service";
+import { useAuthContext } from "../../contexts/authContext";
 
 const SignUpPage = () => {
+  const { signUp } = useAuthContext();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 

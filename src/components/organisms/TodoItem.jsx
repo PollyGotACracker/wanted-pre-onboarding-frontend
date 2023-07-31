@@ -1,7 +1,4 @@
 import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { useAuthContext } from "../../contexts/authContext";
-import { updateTodo, deleteTodo } from "../../services/todo.service";
-import { ERROR_TODO } from "../../constants/message";
 import { useTodoContext } from "../../contexts/todoContext";
 import Checkbox from "../atoms/Checkbox";
 import Button from "../atoms/Button";
@@ -9,9 +6,7 @@ import Input from "../atoms/Input";
 import "./TodoItem.css";
 
 const TodoItem = memo(({ item }) => {
-  const { updateData, deleteData } = useTodoContext();
-  const { getToken } = useAuthContext();
-  const { token } = getToken();
+  const { updateTodo, deleteTodo, updateData, deleteData } = useTodoContext();
   const [todoItem, setTodoItem] = useState({ ...item });
   const [isModify, setIsModify] = useState(false);
   const todoRef = useRef(null);
@@ -23,35 +18,34 @@ const TodoItem = memo(({ item }) => {
   );
 
   const onClickUpdate = useCallback(
-    async ({ modified }) => {
+    async (modified) => {
       if (modified.todo.length < 1) {
         setTodoItem({ ...todoItem, todo: item.todo });
         return false;
       }
-      const result = await updateTodo({ token, item: modified });
-      if (!result) window.alert(ERROR_TODO.update);
-      else updateData({ item: modified });
+      const result = await updateTodo(modified);
+      if (result) updateData(modified);
     },
-    [item.todo, todoItem, token, updateData]
+    [item.todo, todoItem, updateTodo, updateData]
   );
 
   const onChangeCheck = useCallback(
     () =>
       setTodoItem((prev) => {
-        const changed = { ...todoItem, isCompleted: !prev.isCompleted };
-        onClickUpdate({ modified: changed });
-        return changed;
+        const modified = { ...todoItem, isCompleted: !prev.isCompleted };
+        onClickUpdate(modified);
+        return modified;
       }),
     [onClickUpdate, todoItem]
   );
 
   const onClickDelete = useCallback(async () => {
-    const result = await deleteTodo({ token, id: todoItem.id });
+    const result = await deleteTodo(todoItem.id);
     if (result) {
       itemRef.current.style.pointerEvents = "none";
-      await deleteData({ id: todoItem.id });
-    } else window.alert(ERROR_TODO.delete);
-  }, [deleteData, todoItem.id, token]);
+      await deleteData(todoItem.id);
+    }
+  }, [deleteTodo, deleteData, todoItem.id]);
 
   const TEXT = {
     false: <span>{todoItem.todo}</span>,
@@ -78,7 +72,7 @@ const TodoItem = memo(({ item }) => {
     true: {
       firstDataset: "submit-button",
       firstAction: () => {
-        onClickUpdate({ modified: todoItem });
+        onClickUpdate(todoItem);
         setIsModify(false);
       },
       firstText: "제출",

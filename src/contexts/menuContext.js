@@ -1,10 +1,4 @@
-import {
-  useMemo,
-  createContext,
-  useContext,
-  useCallback,
-  useState,
-} from "react";
+import { createContext, useContext, useCallback, useState } from "react";
 
 const MenuContext = createContext();
 
@@ -20,14 +14,11 @@ export const MenuContextProvider = ({ children }) => {
     [sidebarState]
   );
 
-  const value = useMemo(
-    () => ({
-      sidebarState,
-      setSidebarState,
-      toggleSidebar,
-    }),
-    [sidebarState, setSidebarState, toggleSidebar]
-  );
+  const value = {
+    sidebarState,
+    setSidebarState,
+    toggleSidebar,
+  };
 
   return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>;
 };

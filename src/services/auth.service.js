@@ -1,42 +1,46 @@
-import { TASK_API } from "../constants/api";
+class AuthService {
+  endPoint = "/auth";
 
-export const signUp = async ({ email, password }) => {
-  const url = `${TASK_API}/auth/signup`;
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  };
-
-  try {
-    const response = await fetch(url, options);
-    if (response?.ok) return true;
-    else return false;
-  } catch (error) {
-    console.error(error);
-    return false;
+  constructor(httpClient, tokenStorage) {
+    this.httpClient = httpClient;
+    this.tokenStorage = tokenStorage;
   }
-};
 
-export const signIn = async ({ email, password }) => {
-  const url = `${TASK_API}/auth/signin`;
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  };
-
-  try {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    if (result.access_token) return result.access_token;
-    else return false;
-  } catch (error) {
-    console.error(error);
-    return false;
+  async signUp({ email, password }) {
+    const url = `${this.endPoint}/signup`;
+    const options = {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+    };
+    try {
+      const response = await this.httpClient.fetch(url, options);
+      if (response?.ok) return response.ok;
+    } catch (error) {
+      throw new Error(error);
+    }
   }
-};
+
+  async signIn({ email, password }) {
+    const url = `${this.endPoint}/signin`;
+    const options = {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+    };
+    try {
+      const response = await this.httpClient.fetch(url, options);
+      const result = await response.json();
+      if (result.access_token) {
+        this.tokenStorage.set(result.access_token, email);
+        return response.ok;
+      }
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async signOut() {
+    this.tokenStorage.remove();
+  }
+}
+
+export default AuthService;

@@ -1,11 +1,4 @@
-import {
-  useReducer,
-  useMemo,
-  createContext,
-  useContext,
-  useCallback,
-} from "react";
-
+import { useReducer, createContext, useContext, useCallback } from "react";
 const TodoContext = createContext();
 
 export const useTodoContext = () => {
@@ -73,46 +66,39 @@ const reducer = (state, action) => {
   }
 };
 
-export const TodoContextProvider = ({ children }) => {
+export const TodoContextProvider = ({ children, todoService }) => {
   const [state, dispatch] = useReducer(reducer, initState);
-
-  const setData = useCallback(
-    ({ data }) => dispatch({ type: TYPE.SET, data }),
-    []
-  );
+  const setData = useCallback((data) => dispatch({ type: TYPE.SET, data }), []);
   const createData = useCallback(
-    ({ item }) => dispatch({ type: TYPE.CREATE, item }),
+    (item) => dispatch({ type: TYPE.CREATE, item }),
     []
   );
   const updateData = useCallback(
-    ({ item }) => dispatch({ type: TYPE.UPDATE, item }),
+    (item) => dispatch({ type: TYPE.UPDATE, item }),
     []
   );
   const deleteData = useCallback(
-    ({ id }) => dispatch({ type: TYPE.DELETE, id }),
+    (id) => dispatch({ type: TYPE.DELETE, id }),
     []
   );
+  const getTodos = todoService.getTodos.bind(todoService);
+  const createTodo = todoService.createTodo.bind(todoService);
+  const updateTodo = todoService.updateTodo.bind(todoService);
+  const deleteTodo = todoService.deleteTodo.bind(todoService);
 
-  const value = useMemo(
-    () => ({
-      data: state.data,
-      allCount: state.allCount,
-      completeCount: state.completeCount,
-      setData,
-      createData,
-      updateData,
-      deleteData,
-    }),
-    [
-      state.data,
-      state.allCount,
-      state.completeCount,
-      setData,
-      createData,
-      updateData,
-      deleteData,
-    ]
-  );
+  const value = {
+    data: state.data,
+    allCount: state.allCount,
+    completeCount: state.completeCount,
+    getTodos,
+    createTodo,
+    updateTodo,
+    deleteTodo,
+    setData,
+    createData,
+    updateData,
+    deleteData,
+  };
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
 };

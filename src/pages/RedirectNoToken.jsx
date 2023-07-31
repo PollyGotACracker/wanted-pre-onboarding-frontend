@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useAuthContext } from "../contexts/authContext";
 import { ALERT_AUTH } from "../constants/message";
+import TokenStorage from "../utils/tokenStorage";
 
 const RedirectNoToken = () => {
-  const { getToken } = useAuthContext();
-  const { token } = getToken();
+  const tokenStorage = new TokenStorage();
+  const token = tokenStorage.get();
   const location = useLocation();
   const navigate = useNavigate();
 

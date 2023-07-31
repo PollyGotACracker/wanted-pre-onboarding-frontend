@@ -1,80 +1,71 @@
-import { TASK_API } from "../constants/api";
+import { ERROR_TODO } from "../constants/message";
 
-export const getTodos = async ({ token }) => {
-  const url = `${TASK_API}/todos`;
-  const options = {
-    method: "GET",
-    headers: { Authorization: `Bearer ${token}` },
-  };
-  try {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    if (response?.ok) return result;
-    else return false;
-  } catch (error) {
-    console.error(error);
-    return false;
+class TodoService {
+  endPoint = "/todos";
+
+  constructor(httpClient) {
+    this.httpClient = httpClient;
   }
-};
 
-export const createTodo = async ({ token, todo }) => {
-  const url = `${TASK_API}/todos`;
-  const options = {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ todo }),
-  };
-
-  try {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    if (response?.ok) return result;
-    else return false;
-  } catch (error) {
-    console.error(error);
-    return false;
+  async getTodos() {
+    const options = {
+      method: "GET",
+    };
+    try {
+      const response = await this.httpClient.fetch(this.endPoint, options);
+      const result = await response.json();
+      if (response?.ok) return result;
+      else window.alert(ERROR_TODO.get);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
-};
 
-export const updateTodo = async ({ token, item }) => {
-  const { id, todo, isCompleted } = item;
-  const url = `${TASK_API}/todos/${id}`;
-  const options = {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ todo, isCompleted }),
-  };
-
-  try {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    if (response?.ok) return result;
-    else return false;
-  } catch (error) {
-    console.error(error);
-    return false;
+  async createTodo(todo) {
+    const options = {
+      method: "POST",
+      body: JSON.stringify({ todo }),
+    };
+    try {
+      const response = await this.httpClient.fetch(this.endPoint, options);
+      const result = await response.json();
+      if (response?.ok) return result;
+      else window.alert(ERROR_TODO.create);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
-};
 
-export const deleteTodo = async ({ token, id }) => {
-  const url = `${TASK_API}/todos/${id}`;
-  const options = {
-    method: "DELETE",
-    headers: { Authorization: `Bearer ${token}` },
-  };
-
-  try {
-    const response = await fetch(url, options);
-    if (response?.ok) return true;
-    else return false;
-  } catch (error) {
-    console.error(error);
-    return false;
+  async updateTodo(item) {
+    const { id, todo, isCompleted } = item;
+    const url = `${this.endPoint}/${id}`;
+    const options = {
+      method: "PUT",
+      body: JSON.stringify({ todo, isCompleted }),
+    };
+    try {
+      const response = await this.httpClient.fetch(url, options);
+      const result = await response.json();
+      if (response?.ok) return result;
+      else window.alert(ERROR_TODO.update);
+    } catch (error) {
+      throw new Error(error);
+    }
   }
-};
+
+  async deleteTodo(id) {
+    const url = `${this.endPoint}/${id}`;
+    const options = {
+      method: "DELETE",
+    };
+    try {
+      const response = await this.httpClient.fetch(url, options);
+      if (response?.ok) return response.ok;
+      else window.alert(ERROR_TODO.delete);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+}
+
+export default TodoService;

@@ -1,5 +1,7 @@
-import { memo, useMemo, useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import TokenStorage from "../../utils/tokenStorage";
+import emailStorage from "../../utils/emailStorage";
 import { useAuthContext } from "../../contexts/authContext";
 import NavAnchor from "../atoms/NavAnchor";
 import NavSignOut from "../molecules/NavSignOut";
@@ -7,20 +9,25 @@ import NavSignIn from "../molecules/NavSignIn";
 import Nav from "../molecules/Nav";
 import "./NavBar.css";
 
-const NavBar = memo(({ token, email }) => {
-  const { removeToken, userSignOut } = useAuthContext();
+const NavBar = () => {
+  const { signOut } = useAuthContext();
+  const tokenStorage = new TokenStorage();
+  const token = tokenStorage.get();
+  const email = emailStorage.get();
   const navigate = useNavigate();
 
-  const signOut = useCallback(() => {
+  const userSignOut = useCallback(() => {
+    signOut();
     navigate("/", { replace: true });
-    removeToken();
-    userSignOut();
-  }, [removeToken, userSignOut, navigate]);
+  }, [signOut, navigate]);
 
   const navLinks = useMemo(() => {
-    if (!token) return <NavSignOut />;
-    if (token) return <NavSignIn email={email} signOut={signOut} />;
-  }, [token, email, signOut]);
+    return !token ? (
+      <NavSignOut />
+    ) : (
+      <NavSignIn email={email} userSignOut={userSignOut} />
+    );
+  }, [token, email, userSignOut]);
 
   return (
     <Nav
@@ -31,6 +38,6 @@ const NavBar = memo(({ token, email }) => {
       {navLinks}
     </Nav>
   );
-});
+};
 
 export default NavBar;

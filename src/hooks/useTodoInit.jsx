@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../contexts/authContext";
 import { useEffect, useState } from "react";
+import { useAuthContext } from "../contexts/authContext";
 import { useTodoContext } from "../contexts/todoContext";
+import useRouter from "./useRouter";
 
 const useTodoInit = () => {
   const { signOut } = useAuthContext();
   const { data, setData, getTodos } = useTodoContext();
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+  const { replaceTo } = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -19,10 +19,10 @@ const useTodoInit = () => {
         setTimeout(() => setIsLoading(false), 500);
       } else {
         signOut();
-        navigate("/", { replace: true });
+        replaceTo("/");
       }
     })();
-  }, [data.length, getTodos, navigate, setData, signOut]);
+  }, [data.length, getTodos, setData, signOut, replaceTo]);
 
   return { isLoading };
 };

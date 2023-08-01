@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
 import TokenStorage from "../../utils/tokenStorage";
 import emailStorage from "../../utils/emailStorage";
+import useRouter from "../../hooks/useRouter";
 import { useAuthContext } from "../../contexts/authContext";
 import NavAnchor from "../atoms/NavAnchor";
 import NavSignOut from "../molecules/NavSignOut";
@@ -14,12 +14,12 @@ const NavBar = () => {
   const tokenStorage = new TokenStorage();
   const token = tokenStorage.get();
   const email = emailStorage.get();
-  const navigate = useNavigate();
+  const { replaceTo } = useRouter();
 
   const userSignOut = useCallback(() => {
     signOut();
-    navigate("/", { replace: true });
-  }, [signOut, navigate]);
+    replaceTo("/");
+  }, [signOut, replaceTo]);
 
   const navLinks = useMemo(() => {
     return !token ? (

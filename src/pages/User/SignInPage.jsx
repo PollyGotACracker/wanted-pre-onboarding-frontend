@@ -1,35 +1,17 @@
-import { useCallback, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router";
 import Main from "../../components/atoms/Main";
 import UserForm from "../../components/templates/UserForm";
-import { ERROR_AUTH } from "../../constants/message";
-import { useAuthContext } from "../../contexts/authContext";
+import useSignIn from "../../hooks/useSignIn";
 
 const SignInPage = () => {
-  const { signIn } = useAuthContext();
-  const [isLoading, setIsLoading] = useState(false);
+  const { submitForm, isLoading } = useSignIn();
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const onClickSubmit = useCallback(
-    async ({ email, password }) => {
-      setIsLoading(true);
-      const token = await signIn({ email, password });
-      if (token) {
-        navigate("/todo", { replace: true });
-      } else {
-        setIsLoading(false);
-        return ERROR_AUTH.signIn;
-      }
-    },
-    [signIn, navigate]
-  );
 
   return (
     <Main className={"sign-in"} color={"point"}>
       <UserForm
         type={"signIn"}
-        onClickSubmit={onClickSubmit}
+        onClickSubmit={submitForm}
         isLoading={isLoading}
         message={location?.state?.message || ""}
       />

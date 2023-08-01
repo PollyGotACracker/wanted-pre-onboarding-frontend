@@ -1,9 +1,9 @@
 import Spinner from "../../components/atoms/Spinner";
 import TodoList from "../../components/organisms/TodoList";
-import useTodo from "../../hooks/useTodo";
+import useTodoInit from "../../hooks/useTodoInit";
 
 const TodoContent = () => {
-  const { isLoading } = useTodo();
+  const { isLoading } = useTodoInit();
 
   return isLoading ? <Spinner loading={isLoading} /> : <TodoList />;
 };

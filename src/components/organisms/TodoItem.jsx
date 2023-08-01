@@ -1,51 +1,39 @@
-import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { useTodoContext } from "../../contexts/todoContext";
+import { memo, useEffect, useRef, useState } from "react";
 import Checkbox from "../atoms/Checkbox";
 import Button from "../atoms/Button";
 import Input from "../atoms/Input";
 import "./TodoItem.css";
+import useTodoItem from "../../hooks/useTodoItem";
 
 const TodoItem = memo(({ item }) => {
-  const { updateTodo, deleteTodo, updateData, deleteData } = useTodoContext();
-  const [todoItem, setTodoItem] = useState({ ...item });
+  const {
+    todoItem,
+    changeInputTodo,
+    resetTodo,
+    updateTodoItem,
+    deleteTodoItem,
+  } = useTodoItem(item);
   const [isModify, setIsModify] = useState(false);
-  const todoRef = useRef(null);
   const itemRef = useRef(null);
+  const todoRef = useRef(null);
 
-  const onChangeInput = useCallback(
-    (e) => setTodoItem({ ...todoItem, todo: e.target.value }),
-    [todoItem]
-  );
+  const startModify = () => setIsModify(true);
+  const submitModify = async (e) => {
+    await updateTodoItem(e);
+    setIsModify(false);
+  };
+  const cancelModify = () => {
+    resetTodo();
+    setIsModify(false);
+  };
+  const deleteItem = async () => {
+    const result = await deleteTodoItem();
+    if (result) itemRef.current.style.pointerEvents = "none";
+  };
 
-  const onClickUpdate = useCallback(
-    async (modified) => {
-      if (modified.todo.length < 1) {
-        setTodoItem({ ...todoItem, todo: item.todo });
-        return false;
-      }
-      const result = await updateTodo(modified);
-      if (result) updateData(modified);
-    },
-    [item.todo, todoItem, updateTodo, updateData]
-  );
-
-  const onChangeCheck = useCallback(
-    () =>
-      setTodoItem((prev) => {
-        const modified = { ...todoItem, isCompleted: !prev.isCompleted };
-        onClickUpdate(modified);
-        return modified;
-      }),
-    [onClickUpdate, todoItem]
-  );
-
-  const onClickDelete = useCallback(async () => {
-    const result = await deleteTodo(todoItem.id);
-    if (result) {
-      itemRef.current.style.pointerEvents = "none";
-      await deleteData(todoItem.id);
-    }
-  }, [deleteTodo, deleteData, todoItem.id]);
+  useEffect(() => {
+    if (isModify) todoRef.current.focus();
+  }, [isModify]);
 
   const TEXT = {
     false: <span>{todoItem.todo}</span>,
@@ -54,7 +42,7 @@ const TodoItem = memo(({ item }) => {
         dataset={"modify-input"}
         className={"full"}
         value={todoItem.todo}
-        onChange={onChangeInput}
+        onChange={changeInputTodo}
         refHook={todoRef}
       />
     ),
@@ -63,37 +51,27 @@ const TodoItem = memo(({ item }) => {
   const BUTTON = {
     false: {
       firstDataset: "modify-button",
-      firstAction: () => setIsModify(true),
+      firstAction: startModify,
       firstText: "수정",
       secondDataset: "delete-button",
-      secondAction: onClickDelete,
+      secondAction: deleteItem,
       secondText: "삭제",
     },
     true: {
       firstDataset: "submit-button",
-      firstAction: () => {
-        onClickUpdate(todoItem);
-        setIsModify(false);
-      },
+      firstAction: submitModify,
       firstText: "제출",
       secondDataset: "cancel-button",
-      secondAction: () => {
-        setTodoItem({ ...todoItem, todo: item.todo });
-        setIsModify(false);
-      },
+      secondAction: cancelModify,
       secondText: "취소",
     },
   };
-
-  useEffect(() => {
-    if (isModify) todoRef.current.focus();
-  }, [isModify]);
 
   return (
     <li ref={itemRef}>
       <Checkbox
         checked={todoItem.isCompleted}
-        onChange={onChangeCheck}
+        onChange={updateTodoItem}
         text={TEXT[isModify]}
       />
       <Button

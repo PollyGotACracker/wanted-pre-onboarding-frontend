@@ -3,15 +3,15 @@ import { useAuthContext } from "../contexts/authContext";
 import { useEffect, useState } from "react";
 import { useTodoContext } from "../contexts/todoContext";
 
-const useTodo = () => {
+const useTodoInit = () => {
   const { signOut } = useAuthContext();
   const { data, setData, getTodos } = useTodoContext();
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
-      if (data.length > 0) return;
+      if (data.length > 0) return false;
       const result = await getTodos();
       if (result) {
         const data = [...result].reverse();
@@ -27,4 +27,4 @@ const useTodo = () => {
   return { isLoading };
 };
 
-export default useTodo;
+export default useTodoInit;

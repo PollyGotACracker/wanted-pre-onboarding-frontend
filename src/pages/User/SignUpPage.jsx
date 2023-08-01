@@ -1,35 +1,15 @@
-import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Main from "../../components/atoms/Main";
 import UserForm from "../../components/templates/UserForm";
-import { ALERT_AUTH, ERROR_AUTH } from "../../constants/message";
-import { useAuthContext } from "../../contexts/authContext";
+import useSignUp from "../../hooks/useSignUp";
 
 const SignUpPage = () => {
-  const { signUp } = useAuthContext();
-  const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
-
-  const onClickSubmit = useCallback(
-    async ({ email, password }) => {
-      setIsLoading(true);
-      const result = await signUp({ email, password });
-      if (result) {
-        window.alert(ALERT_AUTH.signUp);
-        navigate("/signin", { replace: true });
-      } else {
-        setIsLoading(false);
-        return ERROR_AUTH.signUp;
-      }
-    },
-    [navigate]
-  );
+  const { submitForm, isLoading } = useSignUp();
 
   return (
     <Main className={"sign-up"} color={"point"}>
       <UserForm
         type={"signUp"}
-        onClickSubmit={onClickSubmit}
+        onClickSubmit={submitForm}
         isLoading={isLoading}
       />
     </Main>

@@ -1,35 +1,22 @@
-import { useCallback, useRef, useEffect, useState } from "react";
+import { useRef } from "react";
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
 import Form from "../molecules/Form";
-import { useTodoContext } from "../../contexts/todoContext";
+import useInput from "../../hooks/useInput";
+import useTodoForm from "../../hooks/useTodoForm";
 
 const TodoForm = () => {
-  const { createTodo, createData } = useTodoContext();
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [todo, setTodo] = useState("");
+  const { changeInputValue, value, setValue, isDisabled } = useInput();
+  const { createTodoItem } = useTodoForm();
   const todoRef = useRef(null);
 
-  const onChangeInput = useCallback(({ target }) => setTodo(target.value), []);
-
-  const onKeyDownClickCreate = useCallback(
-    async (e) => {
-      if (todo.length < 1) return false;
-      if (e.key === "Enter" || e.keyCode === 13 || e.type === "click") {
-        const result = await createTodo(todo);
-        if (result) {
-          createData(result);
-          setTodo("");
-          todoRef.current.focus();
-        }
-      }
-    },
-    [todo, createTodo, createData]
-  );
-
-  useEffect(() => {
-    setIsDisabled(todo.length >= 1 ? false : true);
-  }, [todo]);
+  const createHandler = async (e) => {
+    const result = await createTodoItem(e, value);
+    if (result) {
+      setValue("");
+      todoRef.current.focus();
+    }
+  };
 
   return (
     <Form className={"row grayscale simple"}>
@@ -38,14 +25,14 @@ const TodoForm = () => {
         className={"full"}
         placeholder={"할 일을 입력하세요..."}
         autoComplete={"true"}
-        onChange={onChangeInput}
-        onKeyDown={onKeyDownClickCreate}
-        value={todo}
+        onChange={changeInputValue}
+        onKeyDown={createHandler}
+        value={value}
         refHook={todoRef}
       />
       <Button
         dataset={"new-todo-add-button"}
-        onClick={onKeyDownClickCreate}
+        onClick={createHandler}
         text={"추가"}
         disabled={isDisabled}
         className={"primary"}

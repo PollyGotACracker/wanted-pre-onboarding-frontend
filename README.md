@@ -1,12 +1,29 @@
-# [원티드 프리온보딩 인턴십 - 프론트엔드 사전과제](https://github.com/walking-sunset/selection-task)
+# [원티드 프리온보딩 인턴십 - 프론트엔드 선발 과제](https://github.com/walking-sunset/selection-task)
 
 - 전유영
 - bitterns96@gmail.com
 - 2023.06.08 ~ 2023.06.14
+- :bulb: 07.31 FIXED: 토큰 만료 시 /todo 의 401 Unauthorized 오류 처리
 
 ## 배포 주소
 
 - [https://mytodolist.kr/](https://mytodolist.kr/)
+
+## 테스트
+
+> :exclamation: 회원가입 기능 테스트 시 실제 사용하는 이메일을 _절대_ 입력하지 마세요.
+
+- Test email:
+
+```
+polly@polly.com
+```
+
+- Test password:
+
+```
+12341234
+```
 
 ## 실행 방법
 
@@ -63,7 +80,7 @@ npm start
 
 ## 공부
 
-### redirection 오류
+### ~~redirection 오류~~
 
 _/todo 에서 바로 로그아웃하면 메인 화면이 아닌 로그인 화면으로 redirect_
 
@@ -91,12 +108,33 @@ _/todo 에서 바로 로그아웃하면 메인 화면이 아닌 로그인 화면
   - [404.html](https://github.com/rafgraph/spa-github-pages/blob/gh-pages/404.html#L6-L36)
 
 - local 에서 실행한 것과 달리, github 로 배포할 경우 todo component 가 unmount 될 때 데이터를 반환: fetch 함수가 포함된 useEffect 의 코드를 별도의 함수로 분리하여 선언하였다.
+
   - 오류 원인 코드
     ```js
-    useEffect(() => async () => {...}, [...]);
+    useEffect(
+      () => async () => {
+        // fetch
+      },
+      []
+    );
     ```
   - 수정한 코드
+
     ```js
-    const initData = async () => {...};
-    useEffect(() => { initData(); }, [...]);
+    const initData = async () => {
+      // fetch
+    };
+    useEffect(() => {
+      initData();
+    }, [initData]);
+    ```
+
+    ```js
+    useEffect(
+      () =>
+        (async () => {
+          // fetch
+        })(),
+      []
+    );
     ```

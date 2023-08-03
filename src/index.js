@@ -4,7 +4,6 @@ import "./styles/index.css";
 import NavRouterProvider from "./Router";
 import reportWebVitals from "./reportWebVitals";
 import { AuthContextProvider } from "./contexts/authContext";
-import { MenuContextProvider } from "./contexts/menuContext";
 import HttpClient from "./services/core";
 import AuthService from "./services/auth.service";
 import TokenStorage from "./utils/tokenStorage";
@@ -17,9 +16,7 @@ const authService = new AuthService(httpClient, tokenStorage);
 root.render(
   <React.StrictMode>
     <AuthContextProvider authService={authService}>
-      <MenuContextProvider>
-        <NavRouterProvider />
-      </MenuContextProvider>
+      <NavRouterProvider />
     </AuthContextProvider>
   </React.StrictMode>
 );

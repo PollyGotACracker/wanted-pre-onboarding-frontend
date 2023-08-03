@@ -1,5 +1,5 @@
 import Main from "../../components/atoms/Main";
-import Header from "../../components/atoms/Header";
+import Headline from "../../components/atoms/Headline";
 import TodoForm from "../../components/organisms/TodoForm";
 import TodoContent from "../../components/templates/TodoContent";
 import { TodoContextProvider } from "../../contexts/todoContext";
@@ -14,7 +14,7 @@ const TodoPage = () => {
 
   return (
     <Main className={"todo"}>
-      <Header text={"To Do"} />
+      <Headline text={"To Do"} />
       <TodoContextProvider todoService={todoService}>
         <TodoForm />
         <TodoContent />

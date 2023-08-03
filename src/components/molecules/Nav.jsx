@@ -17,14 +17,13 @@ const Nav = memo(({ render, children }) => {
 
   return (
     <>
-      <nav className="nav">
+      <header className="header">
         {render({ className: "home" })}
-
         <Button className="menu" onClick={toggleSidebar} icon={<HiMenu />} />
-      </nav>
-      <div className={`sidebar ${sidebarState}`} onClick={onClickButtons}>
+      </header>
+      <nav className={`sidebar ${sidebarState}`} onClick={onClickButtons}>
         {children}
-      </div>
+      </nav>
     </>
   );
 });

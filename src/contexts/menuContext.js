@@ -1,4 +1,5 @@
 import { createContext, useContext, useCallback, useState } from "react";
+import NavBar from "../components/organisms/NavBar";
 
 const MenuContext = createContext();
 
@@ -20,5 +21,11 @@ export const MenuContextProvider = ({ children }) => {
     toggleSidebar,
   };
 
-  return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>;
+  return (
+    <MenuContext.Provider value={value}>
+      <NavBar />
+      {children}
+      <div className={`blocker ${sidebarState}`} onClick={toggleSidebar}></div>
+    </MenuContext.Provider>
+  );
 };

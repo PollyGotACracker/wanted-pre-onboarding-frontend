@@ -1,5 +1,5 @@
 import { memo, useCallback, useRef, useState } from "react";
-import Header from "../atoms/Header";
+import Headline from "../atoms/Headline";
 import Button from "../atoms/Button";
 import Spinner from "../atoms/Spinner";
 import Alert from "../molecules/Alert";
@@ -28,7 +28,7 @@ const UserForm = memo(({ type, onClickSubmit, isLoading, message = "" }) => {
     <>
       <Alert text={signMessage} />
       <Form className={"column default composite"}>
-        <Header text={TEXT_DATA[type].header} />
+        <Headline text={TEXT_DATA[type].header} />
         <UserInput valueRef={valueRef} setIsInvalid={setIsInvalid} />
         <Button
           className={"primary large"}

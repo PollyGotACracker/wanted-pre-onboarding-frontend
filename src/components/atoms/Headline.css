@@ -1,4 +1,4 @@
-.header {
+.headline {
   font-family: var(--font-header);
   text-align: center;
   font-size: 3em;
@@ -7,12 +7,12 @@
   text-transform: uppercase;
 }
 
-.main > .header {
+.main > .headline {
   margin-top: 2vh;
 }
 
 @media only screen and (max-width: 350px) {
-  .header {
+  .headline {
     font-size: 2em;
   }
 }

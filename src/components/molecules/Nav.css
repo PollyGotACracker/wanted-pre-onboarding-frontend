@@ -1,4 +1,4 @@
-.nav {
+header.header {
   width: 100%;
   height: 50px;
   padding: 0 20px;
@@ -10,7 +10,7 @@
   left: 0;
 }
 
-body:not(:has(.point)) .nav {
+body:not(:has(.point)) header.header {
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -27,27 +27,27 @@ body:not(:has(.point)) .nav {
   right: 0;
 }
 
-.nav .home {
+header.header .home {
   font-weight: 900;
   transition: none;
   color: inherit;
   border: none;
 }
 
-.nav .menu {
+header.header .menu {
   margin-left: auto;
   display: none;
 }
 
-.nav .nav-anchor {
+header.header .nav-anchor {
   height: 100%;
 }
 
 @media only screen and (max-width: 1080px) {
-  .nav .menu {
+  header.header .menu {
     display: block;
   }
-  .nav .menu:hover {
+  header.header .menu:hover {
     color: var(--primary) !important;
   }
 

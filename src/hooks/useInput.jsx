@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-const useInput = () => {
+const useInput = (text = "") => {
   const [isDisabled, setIsDisabled] = useState(true);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(text);
 
   useEffect(() => {
     setIsDisabled(value.length >= 1 ? false : true);

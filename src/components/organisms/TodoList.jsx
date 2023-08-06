@@ -5,8 +5,7 @@ import List from "../../components/molecules/List";
 import TodoItem from "../../components/organisms/TodoItem";
 
 const TodoList = () => {
-  const { data } = useTodoContext();
-  const { allCount, completeCount } = useTodoContext();
+  const { data, allCount, completeCount } = useTodoContext();
 
   return (
     <div className="list-container">

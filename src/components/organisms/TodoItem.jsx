@@ -1,18 +1,13 @@
-import { memo, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Checkbox from "../atoms/Checkbox";
 import Button from "../atoms/Button";
 import Input from "../atoms/Input";
 import "./TodoItem.css";
 import useTodoItem from "../../hooks/useTodoItem";
 
-const TodoItem = memo(({ item }) => {
-  const {
-    todoItem,
-    changeInputTodo,
-    resetTodo,
-    updateTodoItem,
-    deleteTodoItem,
-  } = useTodoItem(item);
+const TodoItem = ({ item }) => {
+  const { value, changeInputValue, resetTodo, updateTodoItem, deleteTodoItem } =
+    useTodoItem(item);
   const [isModify, setIsModify] = useState(false);
   const itemRef = useRef(null);
   const todoRef = useRef(null);
@@ -36,13 +31,13 @@ const TodoItem = memo(({ item }) => {
   }, [isModify]);
 
   const TEXT = {
-    false: <span>{todoItem.todo}</span>,
+    false: <span>{item.todo}</span>,
     true: (
       <Input
         dataset={"modify-input"}
         className={"full"}
-        value={todoItem.todo}
-        onChange={changeInputTodo}
+        value={value}
+        onChange={changeInputValue}
         refHook={todoRef}
       />
     ),
@@ -70,7 +65,7 @@ const TodoItem = memo(({ item }) => {
   return (
     <li ref={itemRef}>
       <Checkbox
-        checked={todoItem.isCompleted}
+        checked={item.isCompleted}
         onChange={updateTodoItem}
         text={TEXT[isModify]}
       />
@@ -86,6 +81,6 @@ const TodoItem = memo(({ item }) => {
       />
     </li>
   );
-});
+};
 
 export default TodoItem;

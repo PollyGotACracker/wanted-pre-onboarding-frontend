@@ -1,49 +1,40 @@
-import { useState } from "react";
 import { useTodoContext } from "../contexts/todoContext";
+import useInput from "./useInput";
 
 const useTodoItem = (item) => {
   const { updateTodo, deleteTodo, updateData, deleteData } = useTodoContext();
-  const [todoItem, setTodoItem] = useState({ ...item });
+  const { value, setValue, changeInputValue } = useInput(item.todo);
 
-  const changeInputTodo = ({ target }) =>
-    setTodoItem({ ...todoItem, todo: target.value });
+  const resetTodo = () => setValue(item.todo);
 
-  const resetTodo = () => {
-    setTodoItem({ ...todoItem, todo: item.todo });
-  };
-
-  const getModified = (currentTarget) => {
-    const isCompleted =
-      currentTarget.type === "checkbox"
-        ? !todoItem.isCompleted
-        : todoItem.isCompleted;
-    return { ...todoItem, isCompleted: isCompleted };
-  };
-
-  const updateTodoItem = async ({ currentTarget }) => {
-    if (todoItem.todo.length === 0) {
+  const updateTodoItem = async ({ target }) => {
+    if (value.length === 0) {
       resetTodo();
       return false;
     }
-    const modified = getModified(currentTarget);
+    // target 이 checkbox 일 때 checked 값, 아니라면 item.isCompleted
+    const modified = {
+      ...item,
+      todo: value ?? item.todo,
+      isCompleted: target.checked ?? item.isCompleted,
+    };
     const result = await updateTodo(modified);
     if (result) {
-      setTodoItem(modified);
       updateData(modified);
     } else resetTodo();
   };
 
   const deleteTodoItem = async () => {
-    const result = await deleteTodo(todoItem.id);
+    const result = await deleteTodo(item.id);
     if (result) {
-      deleteData(todoItem.id);
+      deleteData(item.id);
       return result;
     }
   };
 
   return {
-    todoItem,
-    changeInputTodo,
+    value,
+    changeInputValue,
     resetTodo,
     updateTodoItem,
     deleteTodoItem,

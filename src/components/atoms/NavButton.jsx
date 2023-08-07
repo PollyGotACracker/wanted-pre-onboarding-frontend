@@ -1,7 +1,6 @@
-import { memo } from "react";
 import "./NavButton.css";
 
-const NavButton = memo(({ className, onClick, icon, text }) => {
+const NavButton = ({ className, onClick, icon, text }) => {
   return (
     <button
       className={`nav-button ${className}`}
@@ -12,6 +11,6 @@ const NavButton = memo(({ className, onClick, icon, text }) => {
       {text}
     </button>
   );
-});
+};
 
 export default NavButton;

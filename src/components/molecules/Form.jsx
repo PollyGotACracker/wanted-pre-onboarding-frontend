@@ -1,7 +1,6 @@
-import { memo } from "react";
 import "./Form.css";
 
-const Form = memo(({ className, children }) => {
+const Form = ({ className, children }) => {
   return (
     <form
       className={`form ${className}`}
@@ -12,7 +11,7 @@ const Form = memo(({ className, children }) => {
       {children}
     </form>
   );
-});
+};
 
 export default Form;
 

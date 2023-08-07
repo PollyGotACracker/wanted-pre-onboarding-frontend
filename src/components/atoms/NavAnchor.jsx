@@ -1,8 +1,7 @@
 import "./NavAnchor.css";
-import { memo } from "react";
 import { NavLink } from "react-router-dom";
 
-const NavAnchor = memo(({ className, to, icon, text }) => {
+const NavAnchor = ({ className, to, icon, text }) => {
   return (
     <NavLink
       className={({ isActive }) =>
@@ -14,7 +13,7 @@ const NavAnchor = memo(({ className, to, icon, text }) => {
       {text}
     </NavLink>
   );
-});
+};
 
 export default NavAnchor;
 

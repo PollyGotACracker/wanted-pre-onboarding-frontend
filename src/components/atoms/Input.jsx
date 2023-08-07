@@ -1,38 +1,35 @@
 import "./Input.css";
-import { memo } from "react";
 
-const Input = memo(
-  ({
-    dataset,
-    id,
-    className,
-    type,
-    name,
-    placeholder,
-    autoComplete,
-    value,
-    onChange,
-    onKeyDown,
-    refHook,
-  }) => {
-    return (
-      <input
-        id={id}
-        className={`input ${className}`}
-        data-testid={dataset}
-        name={name}
-        placeholder={placeholder}
-        type={type}
-        autoComplete={autoComplete}
-        value={value}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        spellCheck="false"
-        ref={refHook}
-      />
-    );
-  }
-);
+const Input = ({
+  dataset,
+  id,
+  className,
+  type,
+  name,
+  placeholder,
+  autoComplete,
+  value,
+  onChange,
+  onKeyDown,
+  refHook,
+}) => {
+  return (
+    <input
+      id={id}
+      className={`input ${className}`}
+      data-testid={dataset}
+      name={name}
+      placeholder={placeholder}
+      type={type}
+      autoComplete={autoComplete}
+      value={value}
+      onChange={onChange}
+      onKeyDown={onKeyDown}
+      spellCheck="false"
+      ref={refHook}
+    />
+  );
+};
 
 export default Input;
 

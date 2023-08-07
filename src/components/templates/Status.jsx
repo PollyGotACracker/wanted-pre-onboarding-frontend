@@ -1,7 +1,6 @@
-import { memo } from "react";
 import "./Status.css";
 
-const Status = memo(({ num, title, desc }) => {
+const Status = ({ num, title, desc }) => {
   return (
     <div className="status">
       <div className="status-number">{num}</div>
@@ -9,6 +8,6 @@ const Status = memo(({ num, title, desc }) => {
       <p>{desc}</p>
     </div>
   );
-});
+};
 
 export default Status;

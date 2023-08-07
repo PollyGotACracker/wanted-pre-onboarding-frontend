@@ -1,4 +1,4 @@
-import { memo, useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import Headline from "../atoms/Headline";
 import Button from "../atoms/Button";
 import Spinner from "../atoms/Spinner";
@@ -6,7 +6,7 @@ import Alert from "../molecules/Alert";
 import Form from "../molecules/Form";
 import UserInput from "../organisms/UserInput";
 
-const UserForm = memo(({ type, onClickSubmit, isLoading, message = "" }) => {
+const UserForm = ({ type, onClickSubmit, isLoading, message = "" }) => {
   const [signMessage, setSignMessage] = useState(message);
   const [isInvalid, setIsInvalid] = useState(true);
   const valueRef = useRef({ email: "", password: "" });
@@ -46,6 +46,6 @@ const UserForm = memo(({ type, onClickSubmit, isLoading, message = "" }) => {
       </Form>
     </>
   );
-});
+};
 
 export default UserForm;

@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Input from "../atoms/Input";
 import Label from "../atoms/Label";
 import Button from "../atoms/Button";
@@ -6,7 +6,7 @@ import WrapInput from "../molecules/WrapInput";
 import { MdAlternateEmail, MdLock } from "react-icons/md";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
-const TodoInput = memo(({ valueRef, setIsInvalid }) => {
+const TodoInput = ({ valueRef, setIsInvalid }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordType, setPasswordType] = useState("password");
@@ -84,6 +84,6 @@ const TodoInput = memo(({ valueRef, setIsInvalid }) => {
       />
     </>
   );
-});
+};
 
 export default TodoInput;

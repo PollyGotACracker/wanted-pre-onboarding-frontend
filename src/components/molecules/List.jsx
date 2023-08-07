@@ -1,8 +1,8 @@
 import "./List.css";
-import { memo, createRef, useMemo } from "react";
+import { createRef, useMemo } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-const List = memo(({ data, id, render }) => {
+const List = ({ data, id, render }) => {
   // props 로 render 를 받은 후 호출하면 react element 반환
   // render={(props) => <TodoItem item={props} />}
   const items = useMemo(() => {
@@ -29,6 +29,6 @@ const List = memo(({ data, id, render }) => {
       <TransitionGroup>{items}</TransitionGroup>
     </div>
   );
-});
+};
 
 export default List;

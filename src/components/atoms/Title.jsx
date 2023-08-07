@@ -1,7 +1,7 @@
-import { memo, useMemo } from "react";
+import { useMemo } from "react";
 import "./Title.css";
 
-const Title = memo(({ main, sub, delay }) => {
+const Title = ({ main, sub, delay }) => {
   const animation = useMemo(() => {
     return [...main, ...sub].map((item, index) => {
       const itemDelay = index * delay;
@@ -18,6 +18,6 @@ const Title = memo(({ main, sub, delay }) => {
   }, [main, sub, delay]);
 
   return <div className="title container">{animation}</div>;
-});
+};
 
 export default Title;

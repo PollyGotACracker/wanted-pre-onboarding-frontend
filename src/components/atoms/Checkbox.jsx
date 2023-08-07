@@ -1,8 +1,7 @@
-import { memo } from "react";
 import "./Checkbox.css";
 import { MdCheckBox, MdCheckBoxOutlineBlank } from "react-icons/md";
 
-const Checkbox = memo(({ checked, onChange, text }) => {
+const Checkbox = ({ checked, onChange, text }) => {
   return (
     <label className="checkbox">
       <input
@@ -15,7 +14,7 @@ const Checkbox = memo(({ checked, onChange, text }) => {
       <span className={checked ? "checkbox checked" : "checkbox"}>{text}</span>
     </label>
   );
-});
+};
 
 export default Checkbox;
 

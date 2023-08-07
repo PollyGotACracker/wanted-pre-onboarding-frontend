@@ -1,7 +1,7 @@
-import { memo, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./Main.css";
 
-const Main = memo(({ className, color, type, delay, children }) => {
+const Main = ({ className, color, type, delay, children }) => {
   const mainRef = useRef(null);
 
   // 해당 요소에 css 변수 setting
@@ -14,7 +14,7 @@ const Main = memo(({ className, color, type, delay, children }) => {
       {children}
     </main>
   );
-});
+};
 
 export default Main;
 

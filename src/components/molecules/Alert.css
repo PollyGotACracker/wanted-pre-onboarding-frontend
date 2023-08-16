@@ -1,4 +1,6 @@
 .alert {
+  position: absolute;
+  top: calc(50px + 6vh);
   user-select: none;
   word-break: keep-all;
   font-weight: 700;

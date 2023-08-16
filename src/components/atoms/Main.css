@@ -16,6 +16,10 @@ main.main > * {
   background-color: var(--background-point-color);
 }
 
+main.main:not(.point) {
+  border-top: 1px solid var(--border-color);
+}
+
 .main.circle {
   position: relative;
   justify-content: center;

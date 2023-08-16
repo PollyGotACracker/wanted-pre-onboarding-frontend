@@ -10,10 +10,6 @@ header.header {
   left: 0;
 }
 
-body:not(:has(.point)) header.header {
-  border-bottom: 1px solid var(--border-color);
-}
-
 .sidebar {
   flex: 1;
   height: 50px;

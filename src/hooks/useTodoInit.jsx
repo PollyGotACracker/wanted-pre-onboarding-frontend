@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuthContext } from "../contexts/authContext";
 import { useTodoContext } from "../contexts/todoContext";
 import useRouter from "./useRouter";
@@ -6,7 +6,6 @@ import useRouter from "./useRouter";
 const useTodoInit = () => {
   const { signOut } = useAuthContext();
   const { data, setData, getTodos } = useTodoContext();
-  const [isLoading, setIsLoading] = useState(true);
   const { replaceTo } = useRouter();
 
   useEffect(() => {
@@ -16,15 +15,12 @@ const useTodoInit = () => {
       if (result) {
         const data = [...result].reverse();
         setData(data);
-        setTimeout(() => setIsLoading(false), 500);
       } else {
         signOut();
         replaceTo("/");
       }
     })();
   }, [data.length, getTodos, setData, signOut, replaceTo]);
-
-  return { isLoading };
 };
 
 export default useTodoInit;

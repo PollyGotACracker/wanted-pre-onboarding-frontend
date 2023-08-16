@@ -1,11 +1,16 @@
+import { Suspense } from "react";
 import Spinner from "../../components/atoms/Spinner";
-import TodoList from "../../components/organisms/TodoList";
-import useTodoInit from "../../hooks/useTodoInit";
+import lazyLoader from "../../utils/lazyLoader";
+const TodoList = lazyLoader(() =>
+  import("../../components/organisms/TodoList")
+);
 
 const TodoContent = () => {
-  const { isLoading } = useTodoInit();
-
-  return isLoading ? <Spinner loading={isLoading} /> : <TodoList />;
+  return (
+    <Suspense fallback={<Spinner />}>
+      <TodoList />
+    </Suspense>
+  );
 };
 
 export default TodoContent;

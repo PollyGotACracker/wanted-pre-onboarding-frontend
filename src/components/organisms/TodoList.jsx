@@ -3,8 +3,10 @@ import { useTodoContext } from "../../contexts/todoContext";
 import { RiCheckFill } from "react-icons/ri";
 import List from "../../components/molecules/List";
 import TodoItem from "../../components/organisms/TodoItem";
+import useTodoInit from "../../hooks/useTodoInit";
 
 const TodoList = () => {
+  useTodoInit();
   const { data, allCount, completeCount } = useTodoContext();
 
   return (

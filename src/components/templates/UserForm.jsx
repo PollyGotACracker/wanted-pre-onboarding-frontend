@@ -37,7 +37,7 @@ const UserForm = ({ type, onClickSubmit, isLoading, message = "" }) => {
           disabled={isInvalid}
           text={
             isLoading ? (
-              <Spinner loading={isLoading} size={"1rem"} color={"white"} />
+              <Spinner size={"1rem"} color={"white"} />
             ) : (
               TEXT_DATA[type].text
             )

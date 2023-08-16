@@ -1,10 +1,9 @@
 import PuffLoader from "react-spinners/PuffLoader";
 
-const Spinner = ({ loading, size, color }) => {
+const Spinner = ({ size, color }) => {
   return (
     <PuffLoader
       color={color}
-      loading={loading}
       // cssOverride={}
       size={size}
       aria-label="Loading Spinner"

@@ -1,0 +1,39 @@
+.sidebar .signup,
+.sidebar .user-email {
+  margin-left: auto;
+}
+
+.sidebar .user-email {
+  font-size: 0.8em;
+}
+
+@media only screen and (max-width: 1080px) {
+  .sidebar .signup,
+  .sidebar .user-email {
+    margin-left: 0;
+  }
+
+  .sidebar .user-email,
+  .sidebar .signin {
+    margin-top: auto;
+  }
+
+  .sidebar .signin,
+  .sidebar .signout,
+  .sidebar .signin.active {
+    padding: 0;
+    width: 80%;
+    height: 50px;
+    justify-content: center;
+    border: 0 !important;
+    border-radius: 10px;
+    background-color: var(--primary);
+    color: white;
+    transition: background-color 0.2s ease;
+  }
+
+  .sidebar .signin:hover,
+  .sidebar .signout:hover {
+    background-color: var(--secondary);
+  }
+}

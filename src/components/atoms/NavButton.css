@@ -1,0 +1,23 @@
+.nav-button {
+  height: 100%;
+  font-family: inherit;
+  font-size: 1rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  min-width: 7rem;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  user-select: none;
+  outline: none;
+  transition: color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent;
+}
+
+.nav-button:hover {
+  color: var(--primary);
+}

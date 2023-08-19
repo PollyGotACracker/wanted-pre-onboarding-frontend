@@ -1,20 +1,18 @@
 import { useCallback, useMemo } from "react";
-import TokenStorage from "../../utils/tokenStorage";
-import emailStorage from "../../utils/emailStorage";
 import useRouter from "../../hooks/useRouter";
 import { useAuthContext } from "../../contexts/authContext";
+import emailStorage from "../../utils/emailStorage";
 import NavAnchor from "../atoms/NavAnchor";
 import NavSignOut from "../molecules/NavSignOut";
 import NavSignIn from "../molecules/NavSignIn";
 import Nav from "../molecules/Nav";
 import "./NavBar.css";
 
-const NavBar = () => {
+const NavBar = ({ tokenStorage }) => {
+  const { replaceTo } = useRouter();
   const { signOut } = useAuthContext();
-  const tokenStorage = new TokenStorage();
   const token = tokenStorage.get();
   const email = emailStorage.get();
-  const { replaceTo } = useRouter();
 
   const userSignOut = useCallback(() => {
     signOut();

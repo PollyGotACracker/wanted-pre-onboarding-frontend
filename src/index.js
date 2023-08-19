@@ -3,21 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./styles/index.css";
 import NavRouterProvider from "./Router";
 import reportWebVitals from "./reportWebVitals";
-import { AuthContextProvider } from "./contexts/authContext";
-import HttpClient from "./services/core";
-import AuthService from "./services/auth.service";
-import TokenStorage from "./utils/tokenStorage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-const tokenStorage = new TokenStorage();
-const httpClient = new HttpClient(tokenStorage);
-const authService = new AuthService(httpClient, tokenStorage);
 
 root.render(
   <React.StrictMode>
-    <AuthContextProvider authService={authService}>
-      <NavRouterProvider />
-    </AuthContextProvider>
+    <NavRouterProvider />
   </React.StrictMode>
 );
 

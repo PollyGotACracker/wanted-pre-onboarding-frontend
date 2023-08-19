@@ -7,9 +7,8 @@ export const useMenuContext = () => {
   return useContext(MenuContext);
 };
 
-export const MenuContextProvider = ({ children }) => {
+export const MenuContextProvider = ({ children, tokenStorage }) => {
   const [sidebarState, setSidebarState] = useState("");
-
   const toggleSidebar = useCallback(
     () => setSidebarState(sidebarState === "" ? "active" : ""),
     [sidebarState]
@@ -23,7 +22,7 @@ export const MenuContextProvider = ({ children }) => {
 
   return (
     <MenuContext.Provider value={value}>
-      <NavBar />
+      <NavBar tokenStorage={tokenStorage} />
       {children}
       <div className={`blocker ${sidebarState}`} onClick={toggleSidebar}></div>
     </MenuContext.Provider>

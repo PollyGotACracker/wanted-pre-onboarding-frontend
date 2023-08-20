@@ -9,6 +9,7 @@ class HttpClient {
       ...options,
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": this.baseURL,
         Authorization: "Bearer " + this.tokenStorage.get(),
         ...options?.headers,
       },

@@ -43,4 +43,21 @@ export const todoServices = [
 
     return res(ctx.status(200), ctx.json(data));
   }),
+
+  rest.put(`${baseURL}/todos/:id`, async (req, res, ctx) => {
+    const { id } = req.params;
+    const { todo, isCompleted } = await req.json();
+    const data = {
+      id: id,
+      isCompleted: isCompleted,
+      todo: todo,
+      userId: 4008,
+    };
+
+    return res(ctx.status(200), ctx.json(data));
+  }),
+
+  rest.delete(`${baseURL}/todos/:id`, async (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({}));
+  }),
 ];

@@ -7,7 +7,7 @@
 
 ## 배포 주소
 
-- [https://mytodolist.kr/](https://mytodolist.kr/)
+- <s>`https://mytodolist.kr/`</s>
 
 ## 테스트
 
